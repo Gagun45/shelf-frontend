@@ -127,3 +127,9 @@
     @apply px-4 md:px-12 lg:px-40 py-8
   }
 }
+
+@layer components {
+  .title {
+    @apply font-semibold text-4xl tracking-wider
+  }
+}

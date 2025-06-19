@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 
 type Props = {
   book: BookType;
-  my?: boolean;
 };
 
-const BookCard = ({ book, my = false }: Props) => {
+const BookCard = ({ book }: Props) => {
   return (
-    <div className="h-24 w-48 bg-chart-1 flex flex-col">
-      <img src={book.imageUrl} className="h-24 w-40 object-cover" />
-      <span>Title: {book.title}</span>
-      <span>Author: {book.author}</span>
-      {my && <Link to={`/book/edit/${book.bookPid}`}>Edit</Link>}
-      <Link to={`/book?id=${book.bookPid}`}>More</Link>
-    </div>
+    <Link to={`/book?id=${book.bookPid}`} className="w-27 h-48">
+      <img
+        src={book.imageUrl}
+        alt={book.title}
+        className="object-cover size-full"
+      />
+    </Link>
   );
 };
 export default BookCard;

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 const EditPage = () => {
   const { id } = useParams();
 
-  if (!id || id.length < 8) {
+  if (!id) {
     return <span>Wrong id</span>;
   }
 

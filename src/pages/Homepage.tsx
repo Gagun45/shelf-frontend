@@ -9,8 +9,8 @@ const Homepage = () => {
   }
 
   return (
-    <div>
-      All books
+    <div className="flex flex-col gap-4">
+      <span className="title">All Books</span>
       <div className="flex flex-wrap gap-4">
         {books?.map((book) => (
           <BookCard key={book.bookPid} book={book} />

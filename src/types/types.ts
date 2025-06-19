@@ -12,3 +12,7 @@ export type NewBookType = {
   author: string;
   language: string;
 };
+
+export type UserType = {
+  userPid: string;
+};

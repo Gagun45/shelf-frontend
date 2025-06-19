@@ -11,6 +11,7 @@ import Author from "./Author";
 import ImageFile from "./ImageFile";
 import Submit from "./Submit";
 import Language from "./Language";
+import PublishYear from "./PublishYear";
 
 const formSchema = z
   .object({
@@ -23,6 +24,10 @@ const formSchema = z
     language: z.string().min(1, {
       message: "Language must be at least 2 characters long",
     }),
+    publishYear: z.coerce
+      .number({ message: "Enter a number" })
+      .min(1980)
+      .max(2025),
     imageFile: z.instanceof(File).optional().nullable(),
     imageUrl: z.string().optional(),
   })
@@ -46,6 +51,7 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
       imageUrl: book?.imageUrl,
       imageFile: null,
       language: book?.language,
+      publishYear: book?.publishYear,
     },
   });
 
@@ -53,11 +59,13 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("VALUES: ", values);
-    const { author, title, imageFile, imageUrl, language } = values;
+    const { author, title, imageFile, imageUrl, language, publishYear } =
+      values;
     const formData = new FormData();
     formData.append("author", author);
     formData.append("title", title);
     formData.append("language", language);
+    formData.append("publishYear", publishYear.toString());
     if (imageFile) {
       formData.append("imageFile", imageFile);
     } else {
@@ -72,6 +80,7 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
         <Title />
         <Author />
         <Language />
+        <PublishYear />
         <ImageFile fileInputRef={fileInputRef} />
         <Submit fileInputRef={fileInputRef} isPending={isPending} />
       </form>

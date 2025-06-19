@@ -7,7 +7,7 @@ type Props = {
 
 const BookCard = ({ book }: Props) => {
   return (
-    <Link to={`/book?id=${book.bookPid}`} className="w-27 h-48">
+    <Link to={`/book?id=${book.bookPid}`} className="w-27 md:w-36 h-48 md:h-64">
       <img
         src={book.imageUrl}
         alt={book.title}

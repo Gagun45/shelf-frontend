@@ -5,12 +5,14 @@ export type BookType = {
   addedBy: string;
   imageUrl: string;
   language: string;
+  publishYear: number;
 };
 
 export type NewBookType = {
   title: string;
   author: string;
   language: string;
+  publishYear: number;
 };
 
 export type UserType = {

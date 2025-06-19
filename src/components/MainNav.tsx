@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const MainNav = () => {
   const { isAuthenticated, logout, isLoading, loginWithRedirect } = useAuth0();
+  const returnTo = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 
   const handleLogin = async () => {
     await loginWithRedirect();
@@ -20,7 +21,17 @@ const MainNav = () => {
     <div className=" flex items-center justify-center gap-4">
       <Link to={"/add-book"}>Add</Link>
       <Link to={"/my-books"}>My</Link>
-      <Button onClick={() => logout()}>Logout</Button>
+      <Button
+        onClick={() =>
+          logout({
+            logoutParams: {
+              returnTo,
+            },
+          })
+        }
+      >
+        Logout
+      </Button>
     </div>
   );
 };

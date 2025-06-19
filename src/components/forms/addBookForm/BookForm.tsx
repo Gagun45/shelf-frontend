@@ -12,12 +12,14 @@ import ImageFile from "./ImageFile";
 import Submit from "./Submit";
 import Language from "./Language";
 import PublishYear from "./PublishYear";
+import Genres from "./Genres";
 
 const formSchema = z
   .object({
     title: z.string().min(1, {
       message: "Title must be at least 2 characters long",
     }),
+    genres: z.array(z.string()).min(1, "Choose at least 1 genres"),
     author: z.string().min(1, {
       message: "Author must be at least 2 characters long",
     }),
@@ -46,21 +48,28 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      author: book?.author,
-      title: book?.title,
+      author: book?.author || "",
+      title: book?.title || "",
       imageUrl: book?.imageUrl,
       imageFile: null,
-      language: book?.language,
-      publishYear: book?.publishYear,
+      language: book?.language || "",
+      publishYear: book?.publishYear || 0,
+      genres: book?.genres || [],
     },
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log("VALUES: ", values);
-    const { author, title, imageFile, imageUrl, language, publishYear } =
-      values;
+    const {
+      author,
+      title,
+      imageFile,
+      imageUrl,
+      language,
+      publishYear,
+      genres,
+    } = values;
     const formData = new FormData();
     formData.append("author", author);
     formData.append("title", title);
@@ -71,6 +80,9 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
     } else {
       formData.append("imageUrl", imageUrl as string);
     }
+    genres.forEach((genre, index) => {
+      formData.append(`genres[${index}]`, genre);
+    });
     onSave(formData);
   };
 
@@ -81,6 +93,7 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
         <Author />
         <Language />
         <PublishYear />
+        <Genres />
         <ImageFile fileInputRef={fileInputRef} />
         <Submit fileInputRef={fileInputRef} isPending={isPending} />
       </form>

@@ -6,6 +6,7 @@ export type BookType = {
   imageUrl: string;
   language: string;
   publishYear: number;
+  genres: [string];
 };
 
 export type NewBookType = {
@@ -13,6 +14,7 @@ export type NewBookType = {
   author: string;
   language: string;
   publishYear: number;
+  genres: [string];
 };
 
 export type UserType = {

@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 const AuthCallback = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently, logout } = useAuth0();
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const apiCall = async () => {
       if (isAuthenticated && user) {
         const token = await getAccessTokenSilently();
-        await fetch("http://localhost:7000/api/auth/create-user", {
+        const res = await fetch(`${API_BASE_URL}/auth/create-user`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -19,11 +21,21 @@ const AuthCallback = () => {
           },
           body: JSON.stringify({ email: user.email }),
         });
+        if (!res.ok) {
+          logout();
+        }
       }
       navigate("/");
     };
     apiCall();
-  }, [user, isAuthenticated, getAccessTokenSilently, navigate]);
+  }, [
+    user,
+    isAuthenticated,
+    getAccessTokenSilently,
+    navigate,
+    API_BASE_URL,
+    logout,
+  ]);
 
   return <Loading />;
 };

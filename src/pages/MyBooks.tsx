@@ -12,7 +12,7 @@ const MyBooks = () => {
       My books
       <div className="flex flex-wrap gap-4">
         {books?.map((book) => (
-          <BookCard key={book.bookPid} book={book} my={true} />
+          <BookCard key={book.bookPid} book={book} />
         ))}
       </div>
     </div>

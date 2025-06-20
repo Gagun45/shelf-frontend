@@ -1,3 +1,4 @@
+import { useSearch } from "@/context/SearchContext";
 import type { BookType } from "@/types/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -8,14 +9,17 @@ import { toast } from "sonner";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useAllBooks = () => {
+  const { searchQuery } = useSearch();
+  const route = `${API_BASE_URL}/books/all?${searchQuery}`;
+  console.log(route);
   const fetchBooks = async (): Promise<BookType[]> => {
-    const res = await fetch(`${API_BASE_URL}/books/all`);
+    const res = await fetch(route);
     if (!res.ok) throw new Error("Failed to fetch books");
     return res.json();
   };
 
   const { data: books, isLoading } = useQuery({
-    queryKey: ["books"],
+    queryKey: ["books", searchQuery],
     queryFn: fetchBooks,
   });
 

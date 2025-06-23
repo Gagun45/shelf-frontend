@@ -11,7 +11,6 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useAllBooks = () => {
   const { searchQuery } = useSearch();
   const route = `${API_BASE_URL}/books/all?${searchQuery}`;
-  console.log(route);
   const fetchBooks = async (): Promise<BookType[]> => {
     const res = await fetch(route);
     if (!res.ok) throw new Error("Failed to fetch books");

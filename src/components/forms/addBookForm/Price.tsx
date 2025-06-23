@@ -5,26 +5,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { LANGUAGES } from "@/config/languages";
+import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
 
-const Language = () => {
+const Price = () => {
   const { control } = useFormContext();
   return (
     <FormField
       control={control}
-      name="language"
+      name="price"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Language</FormLabel>
+          <FormLabel>Price</FormLabel>
           <FormControl>
-            <select onChange={(e) => field.onChange(e.target.value)}>
-              {LANGUAGES.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang}
-                </option>
-              ))}
-            </select>
+            <Input type="number" placeholder="Price..." {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -32,4 +26,4 @@ const Language = () => {
     />
   );
 };
-export default Language;
+export default Price;

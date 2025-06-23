@@ -7,6 +7,7 @@ import MyBooks from "./pages/MyBooks";
 import BookPage from "./pages/BookPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import EditPage from "./pages/EditPage";
+import CartPage from "./pages/CartPage";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/add-book" element={<AddBook />} />
           <Route path="/my-books" element={<MyBooks />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/book/edit/:id" element={<EditPage />} />
         </Route>
         <Route path="/" element={<Homepage />} />

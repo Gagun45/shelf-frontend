@@ -13,6 +13,7 @@ import Submit from "./Submit";
 import Language from "./Language";
 import PublishYear from "./PublishYear";
 import Genres from "./Genres";
+import Price from "./Price";
 
 const formSchema = z
   .object({
@@ -30,6 +31,7 @@ const formSchema = z
       .number({ message: "Enter a number" })
       .min(1980)
       .max(2025),
+    price: z.coerce.number({ message: "Enter a number" }).min(0).max(50000),
     imageFile: z.instanceof(File).optional().nullable(),
     imageUrl: z.string().optional(),
   })
@@ -54,6 +56,7 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
       imageFile: null,
       language: book?.language || "",
       publishYear: book?.publishYear || 0,
+      price: book?.price,
       genres: book?.genres || [],
     },
   });
@@ -69,12 +72,14 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
       language,
       publishYear,
       genres,
+      price,
     } = values;
     const formData = new FormData();
     formData.append("author", author);
     formData.append("title", title);
     formData.append("language", language);
     formData.append("publishYear", publishYear.toString());
+    formData.append("price", price.toString());
     if (imageFile) {
       formData.append("imageFile", imageFile);
     } else {
@@ -93,6 +98,7 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
         <Author />
         <Language />
         <PublishYear />
+        <Price />
         <Genres />
         <ImageFile fileInputRef={fileInputRef} />
         <Submit fileInputRef={fileInputRef} isPending={isPending} />

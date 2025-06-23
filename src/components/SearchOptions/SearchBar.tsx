@@ -1,26 +1,37 @@
 import { useSearch } from "@/context/SearchContext";
 import { Button } from "../ui/button";
-import { QueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-
-const qclient = new QueryClient();
+import { XCircle } from "lucide-react";
 
 const SearchBar = () => {
   const { setTitle } = useSearch();
   const [t, setT] = useState("");
-  const handleClick = () => {
-    setTitle(t);
-    qclient.invalidateQueries({ queryKey: ["books"] });
-  };
   return (
-    <div className="w-full flex justify-between border-2 rounded-lg p-2">
+    <form
+      className="w-full max-w-2xl mx-auto flex items-center justify-between border-2 gap-1 rounded-lg p-2"
+      onSubmit={(e) => {
+        e.preventDefault();
+        setTitle(t);
+      }}
+    >
       <input
         className="w-full outline-none"
         value={t}
         onChange={(e) => setT(e.target.value)}
       />
-      <Button onClick={handleClick}>Search</Button>
-    </div>
+      <button
+        type="button"
+        disabled={!t}
+        onClick={() => {
+          setT("");
+          setTitle("");
+        }}
+        className="not-disabled:cursor-pointer disabled:opacity-15"
+      >
+        <XCircle />
+      </button>
+      <Button type="submit">Search</Button>
+    </form>
   );
 };
 export default SearchBar;

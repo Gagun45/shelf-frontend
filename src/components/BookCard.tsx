@@ -11,10 +11,10 @@ type Props = {
 const BookCard = ({ book }: Props) => {
   const { addItem, removeItem, cart } = useCartStore();
   return (
-    <div className="flex flex-col h-96 w-44 gap-2 border-1 px-4 py-2 shadow-2xl rounded-xl">
+    <div className="flex flex-col w-34 xs:w-40 gap-1 border-1 px-4 py-2 shadow-2xl rounded-xl">
       <Link
         to={`/book?id=${book.bookPid}`}
-        className="cursor-pointer h-48 outline-1"
+        className="cursor-pointer h-40 flex-shrink-0 outline-1"
       >
         <img
           src={book.imageUrl}
@@ -24,27 +24,27 @@ const BookCard = ({ book }: Props) => {
       </Link>
       <Link
         to={`/book?id=${book.bookPid}`}
-        className="w-full text-xl h-14 break-words line-clamp-2 hover:underline"
+        className="w-full font-semibold break-words line-clamp-2 hover:underline"
       >
         {book.title}
       </Link>
 
-      <span className="w-full italic h-7 break-words line-clamp-1">
+      <span className="w-full text-sm  italic line-clamp-2">
         {book.author}
       </span>
-      <span className="italic text-xs">
+      <span className="italic text-xs line-clamp-2">
         {book.language}, {book.publishYear}
       </span>
-      <div className="flex items-center justify-between">
+      <div className="flex mt-auto flex-col xs:flex-row gap-1 items-center justify-between">
         <span className="font-bold">{book.price}$</span>
         {cart.some((item) => item.book.bookPid === book.bookPid) ? (
           <Button
-            className="relative"
+            className="relative bg-green-400 hover:bg-destructive/50"
             variant={"outline"}
             onClick={() => removeItem(book.bookPid)}
           >
-            <ShoppingCartIcon className="size-full text-green-400 fill-green-400" />
-            <CheckIcon className="absolute top-0 right-0 text-green-400" />
+            <ShoppingCartIcon className="size-full" />
+            <CheckIcon className="absolute top-0 right-0" />
           </Button>
         ) : (
           <Button

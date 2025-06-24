@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+
 import { useUserData } from "@/hooks/useUserData";
 import CartIcon from "./CartIcon";
 
@@ -24,8 +24,8 @@ const MainNav = () => {
 
   return (
     <div className=" flex items-center justify-center gap-4">
-      <Link to={"/add-book"}>Add</Link>
-      <Link to={"/my-books"}>My</Link>
+      {/* <Link to={"/add-book"}>Add</Link>
+      <Link to={"/my-books"}>My</Link> */}
       <CartIcon />
       <Button
         onClick={() =>

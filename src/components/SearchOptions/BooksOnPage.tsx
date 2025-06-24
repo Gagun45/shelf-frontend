@@ -8,11 +8,11 @@ const BooksOnPage = () => {
         <select
           value={limit}
           onChange={(e) => setLimit(parseInt(e.target.value))}
-          >
+        >
           Books on pages
-          <option value={1}>1</option>
-          <option value={2}>2</option>
           <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
         </select>
       </label>
     </div>

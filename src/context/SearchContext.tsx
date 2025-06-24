@@ -48,7 +48,7 @@ type SearchPrice = {
 
 export const SearchProvider = ({ children }: Props) => {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(1);
+  const [limit, setLimit] = useState(5);
 
   const [price, setPrice] = useState<SearchPrice>({
     fromPrice: 0,

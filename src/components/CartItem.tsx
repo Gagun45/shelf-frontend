@@ -1,69 +1,76 @@
 import { useCartStore, type CartItemInterface } from "@/stores/useCartStore";
 import { Button } from "./ui/button";
-import { TrashIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 type Props = {
   item: CartItemInterface;
 };
 
-const CartItem = ({ item }: Props) => {
+const CartItem = ({ item: { book, quantity } }: Props) => {
   const { changeAmount, removeItem } = useCartStore();
+
   return (
-    <div className="grid p-1 grid-cols-[4fr_1fr_2fr_1fr] lg:grid-cols-[6fr_1fr_2fr_1fr] border-b-1">
+    <div className="grid grid-cols-[5fr_1fr] gap-y-4 p-1 sm:p-2 outline-1">
       <div className="flex items-center gap-2">
-        <div className="size-24 flex-shrink-0 hidden lg:flex">
-          <img src={item.book.imageUrl} className="object-contain size-full" />
+        <div className="hidden sm:block h-32 w-32 flex-shrink-0 ">
+          <img
+            src={book.imageUrl}
+            alt={book.title}
+            className="object-contain size-full"
+          />
         </div>
         <div className="flex flex-col">
           <Link
-            to={`/book?id=${item.book.bookPid}`}
-            className="underline line-clamp-1"
+            to={`/book?id=${book.bookPid}`}
+            className="flex font-semibold gap-2 items-center"
           >
-            {item.book.title}
+            <span>{book.title}</span>
           </Link>
-          <span className="italic text-xs">{item.book.author}</span>
+          <span className="text-sm italic">{book.author}</span>
+          <span className="text-xs italic">
+            {book.language}, {book.publishYear}
+          </span>
         </div>
-        <Button
-          className="size-8 ml-auto"
-          variant={"destructive"}
-          onClick={() => removeItem(item.book.bookPid)}
-        >
-          <TrashIcon className="size-4" />
-        </Button>
       </div>
-      <span className="flex items-center justify-center">
-        {item.book.price}$
-      </span>
-      <div className="flex items-center justify-center">
-        {item.quantity === 0 ? (
+      <Button
+        className="size-8 ml-auto my-auto"
+        variant={"destructive"}
+        onClick={() => removeItem(book.bookPid)}
+      >
+        <TrashIcon />
+      </Button>
+      <div className="flex items-center">
+        {quantity === 0 ? (
           <Button
             className="size-8"
             variant={"destructive"}
-            onClick={() => removeItem(item.book.bookPid)}
+            onClick={() => removeItem(book.bookPid)}
           >
             <TrashIcon />
           </Button>
         ) : (
           <Button
             className="size-8"
-            onClick={() => changeAmount(item.book.bookPid, -1)}
+            variant={"outline"}
+            onClick={() => changeAmount(book.bookPid, -1)}
           >
-            -
+            <MinusIcon />
           </Button>
         )}
         <span className="size-8 flex items-center justify-center">
-          {item.quantity}
+          {quantity}
         </span>
         <Button
           className="size-8"
-          onClick={() => changeAmount(item.book.bookPid, +1)}
+          variant={"outline"}
+          onClick={() => changeAmount(book.bookPid, +1)}
         >
-          +
+          <PlusIcon />
         </Button>
       </div>
-      <span className="font-semibold flex items-center justify-center">
-        {item.book.price * item.quantity}$
+      <span className="flex items-center font-semibold ml-auto">
+        {quantity * book.price}$
       </span>
     </div>
   );

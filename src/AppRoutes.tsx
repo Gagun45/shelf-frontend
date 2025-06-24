@@ -3,11 +3,11 @@ import MainLayout from "./layouts/MainLayout";
 import Homepage from "./pages/Homepage";
 import AuthCallback from "./pages/AuthCallback";
 import AddBook from "./pages/AddBook";
-import MyBooks from "./pages/MyBooks";
 import BookPage from "./pages/BookPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import EditPage from "./pages/EditPage";
 import CartPage from "./pages/CartPage";
+import MyBooksPage from "./pages/MyBooksPage";
 
 const AppRoutes = () => {
   return (
@@ -15,7 +15,7 @@ const AppRoutes = () => {
       <Route element={<MainLayout />}>
         <Route element={<ProtectedRoute />}>
           <Route path="/add-book" element={<AddBook />} />
-          <Route path="/my-books" element={<MyBooks />} />
+          <Route path="/my-books" element={<MyBooksPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/book/edit/:id" element={<EditPage />} />
         </Route>

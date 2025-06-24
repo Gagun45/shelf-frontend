@@ -1,11 +1,11 @@
-import { useAllBooks } from "@/api/books";
+import { useMyBooks } from "@/api/books";
 import BookCard from "./BookCard";
 import Loading from "./Loading";
 import { useSearch } from "@/context/SearchContext";
 import Pagination from "./SearchOptions/Pagination";
 
-const AllBooks = () => {
-  const { booksResponse, isLoading } = useAllBooks();
+const MyBooks = () => {
+  const { booksResponse, isLoading } = useMyBooks();
   const { limit } = useSearch();
   if (isLoading) {
     return <Loading />;
@@ -26,4 +26,4 @@ const AllBooks = () => {
     </div>
   );
 };
-export default AllBooks;
+export default MyBooks;

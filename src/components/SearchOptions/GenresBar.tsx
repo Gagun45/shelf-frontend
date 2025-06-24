@@ -1,7 +1,8 @@
 import { GENRES } from "@/config/genres";
 import { useSearch } from "@/context/SearchContext";
-import { Label } from "./ui/label";
-import { Checkbox } from "./ui/checkbox";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
+
 
 const GenresBar = () => {
   const { genres, setGenres } = useSearch();

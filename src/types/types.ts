@@ -30,8 +30,8 @@ interface SortOptionInt {
 export const AllSortOptions: SortOptionInt[] = [
   { title: "From A to Z", value: "AlphabetAsc" },
   { title: "From Z to A", value: "AlphabetDesc" },
-  { title: "Year from low to high", value: "YearAsc" },
-  { title: "Year from high to low", value: "YearDesc" },
+  { title: "Old to new (by year)", value: "YearAsc" },
+  { title: "New to old (by year)", value: "YearDesc" },
   { title: "Price from low to high", value: "PriceAsc" },
   { title: "Price from high to low", value: "PriceDesc" },
 ];

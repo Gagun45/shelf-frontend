@@ -7,11 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import BooksOnPage from "./BooksOnPage";
 
 const SortBar = () => {
   const { sortOption, setSortOption } = useSearch();
   return (
     <div className="flex items-center gap-1">
+      <BooksOnPage />
       <Select onValueChange={(val) => setSortOption(val)}>
         <SelectTrigger className="w-fit">
           <SelectValue

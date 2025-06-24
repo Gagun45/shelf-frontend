@@ -8,21 +8,26 @@ import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+type BooksResponse = {
+  books: BookType[];
+  totalBooks: number;
+};
+
 export const useAllBooks = () => {
   const { searchQuery } = useSearch();
   const route = `${API_BASE_URL}/books/all?${searchQuery}`;
-  const fetchBooks = async (): Promise<BookType[]> => {
+  const fetchBooks = async (): Promise<BooksResponse> => {
     const res = await fetch(route);
     if (!res.ok) throw new Error("Failed to fetch books");
     return res.json();
   };
 
-  const { data: books, isLoading } = useQuery({
+  const { data: booksResponse, isLoading } = useQuery({
     queryKey: ["books", searchQuery],
     queryFn: fetchBooks,
   });
 
-  return { books, isLoading };
+  return { booksResponse, isLoading };
 };
 
 export const useBookById = (bookPid?: string) => {
@@ -116,9 +121,10 @@ export const useEditBook = (bookPid: string) => {
 
 export const useMyBooks = () => {
   const { getAccessTokenSilently } = useAuth0();
-  const fetchMyBooks = async (): Promise<BookType[]> => {
+  const { searchQuery } = useSearch();
+  const fetchMyBooks = async (): Promise<BooksResponse> => {
     const token = await getAccessTokenSilently();
-    const res = await fetch(`${API_BASE_URL}/books/my-books`, {
+    const res = await fetch(`${API_BASE_URL}/books/my-books?${searchQuery}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -127,10 +133,10 @@ export const useMyBooks = () => {
     return res.json();
   };
 
-  const { data: books, isLoading } = useQuery({
-    queryKey: ["myBooks"],
+  const { data: booksResponse, isLoading } = useQuery({
+    queryKey: ["myBooks", searchQuery],
     queryFn: fetchMyBooks,
   });
 
-  return { books, isLoading };
+  return { booksResponse, isLoading };
 };

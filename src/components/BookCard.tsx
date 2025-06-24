@@ -11,15 +11,15 @@ type Props = {
 const BookCard = ({ book }: Props) => {
   const { addItem, removeItem, cart } = useCartStore();
   return (
-    <div className="flex flex-col h-fit w-36 md:w-45 gap-2 border-1 px-4 py-2 shadow-2xl rounded-xl">
+    <div className="flex flex-col h-96 w-44 gap-2 border-1 px-4 py-2 shadow-2xl rounded-xl">
       <Link
         to={`/book?id=${book.bookPid}`}
-        className="cursor-pointer min-h-48 md:min-h-64"
+        className="cursor-pointer h-48 outline-1"
       >
         <img
           src={book.imageUrl}
           alt={book.title}
-          className="object-fill size-full"
+          className="object-contain size-full"
         />
       </Link>
       <Link
@@ -28,9 +28,13 @@ const BookCard = ({ book }: Props) => {
       >
         {book.title}
       </Link>
-      <div className="w-full italic h-7 break-words line-clamp-1">
+
+      <span className="w-full italic h-7 break-words line-clamp-1">
         {book.author}
-      </div>
+      </span>
+      <span className="italic text-xs">
+        {book.language}, {book.publishYear}
+      </span>
       <div className="flex items-center justify-between">
         <span className="font-bold">{book.price}$</span>
         {cart.some((item) => item.book.bookPid === book.bookPid) ? (

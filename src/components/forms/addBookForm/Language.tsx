@@ -5,6 +5,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { LANGUAGES } from "@/config/languages";
 import { useFormContext } from "react-hook-form";
 
@@ -18,13 +25,21 @@ const Language = () => {
         <FormItem>
           <FormLabel>Language</FormLabel>
           <FormControl>
-            <select onChange={(e) => field.onChange(e.target.value)}>
-              {LANGUAGES.map((lang) => (
-                <option key={lang} value={lang}>
-                  {lang}
-                </option>
-              ))}
-            </select>
+            <Select
+              value={field.value}
+              onValueChange={(val) => field.onChange(val)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a language" />
+              </SelectTrigger>
+              <SelectContent>
+                {LANGUAGES.map((lang) => (
+                  <SelectItem key={lang} value={lang}>
+                    {lang}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </FormControl>
           <FormMessage />
         </FormItem>

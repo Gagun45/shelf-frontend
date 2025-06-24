@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [t, setT] = useState("");
   return (
     <form
-      className="w-full max-w-2xl mx-auto flex items-center justify-between border-2 gap-1 rounded-lg p-2"
+      className="w-full max-w-2xl flex items-center justify-between border-2 gap-1 rounded-lg p-2"
       onSubmit={(e) => {
         e.preventDefault();
         setTitle(t);

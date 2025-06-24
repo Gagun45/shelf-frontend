@@ -15,8 +15,8 @@ const EditBook = ({ bookPid }: { bookPid: string }) => {
   }
 
   return (
-    <div>
-      EditBook
+    <div className="flex flex-col gap-4">
+      <h3 className="title">EditBook</h3>
       <BookForm onSave={editBook} isPending={isPending} book={book} />
     </div>
   );

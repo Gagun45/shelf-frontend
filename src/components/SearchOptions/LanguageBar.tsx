@@ -1,7 +1,8 @@
 import { LANGUAGES } from "@/config/languages";
 import { useSearch } from "@/context/SearchContext";
-import { Label } from "./ui/label";
-import { Checkbox } from "./ui/checkbox";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
+
 
 const LanguageBar = () => {
   const { language, setLanguage } = useSearch();

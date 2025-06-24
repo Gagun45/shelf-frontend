@@ -4,8 +4,8 @@ import { BookForm } from "@/components/forms/addBookForm/BookForm";
 const AddBook = () => {
   const { addBook, isPending } = useAddBook();
   return (
-    <div>
-      AddBook
+    <div className="flex flex-col gap-6">
+      <h3 className="title">AddBook</h3>
       <BookForm onSave={addBook} isPending={isPending} />
     </div>
   );

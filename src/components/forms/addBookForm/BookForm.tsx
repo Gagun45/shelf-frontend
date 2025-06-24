@@ -31,7 +31,7 @@ const formSchema = z
       .number({ message: "Enter a number" })
       .min(1980)
       .max(2025),
-    price: z.coerce.number({ message: "Enter a number" }).min(0).max(50000),
+    price: z.coerce.number({ message: "Enter a number" }).min(1).max(20000),
     imageFile: z.instanceof(File).optional().nullable(),
     imageUrl: z.string().optional(),
   })
@@ -54,9 +54,9 @@ export const BookForm = ({ onSave, isPending, book }: Props) => {
       title: book?.title || "",
       imageUrl: book?.imageUrl,
       imageFile: null,
-      language: book?.language || "",
+      language: book?.language || undefined,
       publishYear: book?.publishYear || 0,
-      price: book?.price,
+      price: book?.price || 0,
       genres: book?.genres || [],
     },
   });

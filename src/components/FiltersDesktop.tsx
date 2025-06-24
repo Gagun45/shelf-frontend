@@ -1,11 +1,15 @@
-import GenresBar from "./GenresBar";
-import LanguageBar from "./LanguageBar";
+import { useSearch } from "@/context/SearchContext";
+import GenresBar from "./SearchOptions/GenresBar";
+import LanguageBar from "./SearchOptions/LanguageBar";
 import { PriceBar } from "./SearchOptions/PriceBar";
 import YearBar from "./SearchOptions/YearBar";
+import { Button } from "./ui/button";
 
 const FiltersDesktop = () => {
+  const {resetFilters} = useSearch()
   return (
-    <div className="hidden xl:flex flex-col">
+    <div className="hidden xl:flex flex-col gap-4">
+      <Button className="w-fit" onClick={resetFilters}>Reset filters</Button>
       <YearBar />
       <PriceBar />
       <GenresBar />

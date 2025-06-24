@@ -27,6 +27,11 @@ type ContextType = {
   language: string[];
   setLanguage: React.Dispatch<React.SetStateAction<string[]>>;
   searchQuery: string;
+  page: number;
+  limit: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
+  resetFilters: () => void;
 };
 
 const SearchContext = createContext<ContextType | null>(null);
@@ -42,9 +47,12 @@ type SearchPrice = {
 };
 
 export const SearchProvider = ({ children }: Props) => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(1);
+
   const [price, setPrice] = useState<SearchPrice>({
     fromPrice: 0,
-    toPrice: 2000,
+    toPrice: 20000,
   });
   const [title, setTitle] = useState<string>("");
   const [year, setYear] = useState<SearchYear>({
@@ -60,6 +68,13 @@ export const SearchProvider = ({ children }: Props) => {
   const [debouncedYear] = useDebounce(year, 500);
   const [debouncedGenres] = useDebounce(genres, 500);
 
+  const resetFilters = () => {
+    setYear({ fromYear: 1980, toYear: 2025 });
+    setPrice({ fromPrice: 0, toPrice: 20000 });
+    setGenres([]);
+    setLanguage(LANGUAGES);
+  };
+
   useEffect(() => {
     const queryParts: string[] = [];
     if (title) queryParts.push(`title=${title}`);
@@ -70,7 +85,7 @@ export const SearchProvider = ({ children }: Props) => {
 
     if (debouncedPrice.fromPrice !== 0)
       queryParts.push(`fromPrice=${debouncedPrice.fromPrice}`);
-    if (debouncedPrice.toPrice !== 2000)
+    if (debouncedPrice.toPrice !== 20000)
       queryParts.push(`toPrice=${debouncedPrice.toPrice}`);
 
     if (sortOption && sortOption !== "AlphabetAsc")
@@ -81,6 +96,8 @@ export const SearchProvider = ({ children }: Props) => {
     if (language && language.length > 0 && language.length !== 3) {
       queryParts.push(`language=${language.join(",")}`);
     }
+    queryParts.push(`page=${page}`);
+    queryParts.push(`limit=${limit}`);
     setSearchQuery(queryParts.join("&").replace(" ", "%20"));
   }, [
     title,
@@ -89,6 +106,8 @@ export const SearchProvider = ({ children }: Props) => {
     debouncedGenres,
     language,
     debouncedPrice,
+    limit,
+    page,
   ]);
 
   return (
@@ -107,6 +126,11 @@ export const SearchProvider = ({ children }: Props) => {
         setGenres,
         language,
         setLanguage,
+        page,
+        setPage,
+        limit,
+        setLimit,
+        resetFilters,
       }}
     >
       {children}

@@ -11,7 +11,7 @@ export const PriceBar = () => {
         <Slider
           value={[price.fromPrice, price.toPrice]}
           min={0}
-          max={2000}
+          max={20000}
           step={1}
           className="w-full"
           onValueChange={(val) =>

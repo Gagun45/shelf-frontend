@@ -10,6 +10,11 @@ export type BookType = {
   price: number;
 };
 
+export type BooksResponse = {
+  books: BookType[];
+  totalBooks: number;
+};
+
 export type NewBookType = {
   title: string;
   author: string;

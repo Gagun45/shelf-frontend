@@ -2,7 +2,6 @@ import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
 import SearchBar from "@/components/SearchOptions/SearchBar";
 import SortBar from "@/components/SearchOptions/SortBar";
-import { useSearch } from "@/context/SearchContext";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -11,7 +10,6 @@ type Props = {
 };
 
 const BooksPagesLayout = ({ children, heading }: Props) => {
-  const { title } = useSearch();
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[250px_1fr]">
       <div className="hidden xl:flex">
@@ -26,7 +24,6 @@ const BooksPagesLayout = ({ children, heading }: Props) => {
               <span className="title">{heading}</span>
               <SortBar />
             </div>
-            {title && <span>Results for search {title}</span>}
             {children}
           </div>
         </div>

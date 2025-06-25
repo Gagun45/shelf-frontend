@@ -1,5 +1,5 @@
 import { useSearch } from "@/context/SearchContext";
-import type { BookType } from "@/types/types";
+import type { BooksResponse, BookType } from "@/types/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -8,10 +8,6 @@ import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-type BooksResponse = {
-  books: BookType[];
-  totalBooks: number;
-};
 
 export const useAllBooks = () => {
   const { searchQuery } = useSearch();

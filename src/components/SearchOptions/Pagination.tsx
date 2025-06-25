@@ -49,7 +49,7 @@ const Pagination = ({ totalPages }: Props) => {
   }, [totalPages, page, setPage]);
 
   return (
-    <div className="flex justify-between gap-4">
+    <div className="flex items-center justify-between gap-4">
       <Button onClick={() => setPage((prev) => prev - 1)} disabled={page === 1}>
         Prev
       </Button>

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { XCircle } from "lucide-react";
 
 const SearchBar = () => {
-  const { setTitle } = useSearch();
-  const [t, setT] = useState("");
+  const { title, setTitle } = useSearch();
+  const [t, setT] = useState(title);
   return (
     <form
       className="w-full max-w-2xl flex items-center justify-between border-2 gap-1 rounded-lg p-2"

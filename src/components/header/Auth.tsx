@@ -7,13 +7,18 @@ const Auth = ({ withText = true }: { withText?: boolean }) => {
   const { logout, loginWithRedirect } = useAuth0();
   const { userData, isLoading } = useUserData();
 
+  const returnTo = import.meta.env.VITE_AUTH0_REDIRECT_URI;
+
   if (isLoading) {
     return <></>;
   }
   return (
     <>
       {userData ? (
-        <Button className="w-fit" onClick={() => logout()}>
+        <Button
+          className="w-fit"
+          onClick={() => logout({ logoutParams: { returnTo } })}
+        >
           <LogOutIcon />
           {withText && <span>Logout</span>}
         </Button>

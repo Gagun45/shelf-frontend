@@ -26,6 +26,7 @@ export type NewBookType = {
 
 export type UserType = {
   userPid: string;
+  role: 'user' | 'admin'
 };
 
 interface SortOptionInt {

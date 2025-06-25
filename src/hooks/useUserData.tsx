@@ -6,8 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useUserData = () => {
   const { getAccessTokenSilently, isAuthenticated, isLoading } = useAuth0();
-  const userData = useUserStore((state) => state.userData);
-  const setUserData = useUserStore((state) => state.setUserData);
+  const { userData, setUserData } = useUserStore();
 
   useEffect(() => {
     const fetchUserData = async () => {

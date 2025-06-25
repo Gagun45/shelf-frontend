@@ -16,9 +16,9 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/add-book" element={<AddBook />} />
           <Route path="/my-books" element={<MyBooksPage />} />
-          <Route path="/cart" element={<CartPage />} />
           <Route path="/book/edit/:id" element={<EditPage />} />
         </Route>
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/auth-callback" element={<AuthCallback />} />
         <Route path="/book" element={<BookPage />} />

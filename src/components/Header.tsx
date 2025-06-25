@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CartIcon from "./CartIcon";
 import { SidebarTrigger } from "./ui/sidebar";
+import Auth from "./header/Auth";
 
 const Header = () => {
   return (
@@ -9,7 +10,10 @@ const Header = () => {
       <Link to={"/"} className="font-bold text-6xl tracking-widest">
         Shelf
       </Link>
-      <CartIcon />
+      <div className="flex items-center gap-6">
+        <CartIcon />
+        <Auth withText={false} />
+      </div>
     </header>
   );
 };

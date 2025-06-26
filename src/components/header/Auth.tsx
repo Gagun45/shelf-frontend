@@ -2,7 +2,6 @@ import { useUserData } from "@/hooks/useUserData";
 import { Button } from "../ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogInIcon, LogOutIcon } from "lucide-react";
-import React from "react";
 
 const Auth = ({ withText = true }: { withText?: boolean }) => {
   const { logout, loginWithRedirect } = useAuth0();

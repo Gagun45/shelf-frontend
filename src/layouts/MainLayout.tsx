@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <SidebarProvider>
+    <SidebarProvider open={true}>
       <AppSidebar />
       <div className="min-h-screen w-screen">
         <Header />

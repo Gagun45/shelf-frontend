@@ -4,9 +4,10 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
+
+import logo from "@/assets/Logo.png";
 
 import { Link } from "react-router-dom";
 
@@ -42,13 +43,19 @@ const PROTECTED_LINKS: LinkInt[] = [
 ];
 
 export function AppSidebar() {
-  const { toggleSidebar } = useSidebar();
   const { userData } = useUserData();
+  const { setOpenMobile, isMobile } = useSidebar();
+
+  const handleOnClick = () => {
+    if (isMobile) setOpenMobile(false);
+    return;
+  };
   return (
     <Sidebar>
       <SidebarHeader className="h-48 items-center justify-center bg-main relative">
-        <SidebarTrigger className="md:hidden absolute top-4 left-4" />
-        <span className="text-3xl font-bold">Shelf</span>
+        <Link to={"/"}>
+          <img src={logo} alt="Shelf" />
+        </Link>
       </SidebarHeader>
       <Separator />
       <SidebarContent className="bg-main p-2">
@@ -58,7 +65,7 @@ export function AppSidebar() {
               to={to}
               key={title}
               className="flex gap-2 hover:underline items-center justify-start"
-              onClick={toggleSidebar}
+              onClick={handleOnClick}
             >
               {icon}
               <span className="text-2xl tracking-wide font-semibold">
@@ -74,7 +81,7 @@ export function AppSidebar() {
                 to={to}
                 key={title}
                 className="flex gap-2 hover:underline items-center justify-start"
-                onClick={toggleSidebar}
+                onClick={handleOnClick}
               >
                 {icon}
                 <span className="text-2xl tracking-wide font-semibold">
@@ -85,7 +92,7 @@ export function AppSidebar() {
           <Link
             to={"/cart"}
             className="flex gap-2 hover:underline items-center justify-start"
-            onClick={toggleSidebar}
+            onClick={handleOnClick}
           >
             <ShoppingCart className="size-7" />
             <span className="text-2xl tracking-wide font-semibold">

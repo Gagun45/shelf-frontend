@@ -11,7 +11,7 @@ type Props = {
 const BookCard = ({ book }: Props) => {
   const { addItem, removeItem, cart } = useCartStore();
   return (
-    <div className="flex flex-col w-34 xs:w-40 gap-1 border-1 px-4 py-2 shadow-2xl rounded-xl">
+    <div className="flex flex-col w-34 xs:w-39 gap-1 border-1 px-4 py-2 shadow-2xl rounded-xl">
       <Link
         to={`/book?id=${book.bookPid}`}
         className="cursor-pointer h-40 flex-shrink-0 outline-1"

@@ -20,7 +20,7 @@ const BooksPagesLayout = ({ children, heading }: Props) => {
         <FiltersMobile />
         <div className="flex flex-wrap">
           <div className="flex flex-col w-full gap-4">
-            <div className="flex justify-between">
+            <div className="flex flex-col gap-2 xs:flex-row justify-between">
               <span className="title">{heading}</span>
               <SortBar />
             </div>

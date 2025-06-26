@@ -1,16 +1,18 @@
 import CartItem from "@/components/CartItem";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/useCartStore";
+import { ShoppingBasketIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const { cart, totalSum, clearCart } = useCartStore();
   if (cart.length === 0)
     return (
-      <div className="text-4xl space-y-8">
-        <h3>Your cart is empty</h3>
+      <div className="text-4xl mt-16 flex flex-col gap-12 items-center justify-center">
+        <h3 className="italic">Your cart is empty</h3>
+        <ShoppingBasketIcon className="size-36" />
         <Link to={"/"} className="underline">
-          Add
+          Explore the Shelf
         </Link>
       </div>
     );

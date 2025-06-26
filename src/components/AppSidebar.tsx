@@ -87,7 +87,7 @@ export function AppSidebar() {
             className="flex gap-2 hover:underline items-center justify-start"
             onClick={toggleSidebar}
           >
-            <ShoppingCart />
+            <ShoppingCart className="size-7" />
             <span className="text-2xl tracking-wide font-semibold">
               My Cart
             </span>

@@ -14,11 +14,12 @@ const BooksCardsLayout = ({ booksResponse: { books, totalBooks } }: Props) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-4">
-        {title && (
-          <div className="w-full">
-            {totalBooks} results include '{title}'
-          </div>
-        )}
+        <div className="w-full">
+          {title
+            ? `${totalBooks} results include '${title}'`
+            : `${totalBooks} results found`}
+        </div>
+
         {books?.map((book) => (
           <BookCard key={book.bookPid} book={book} />
         ))}

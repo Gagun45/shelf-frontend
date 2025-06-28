@@ -11,6 +11,6 @@ const MyBooks = () => {
     return <span>No books found</span>;
   }
 
-  return <BooksCardsLayout booksResponse={booksResponse} />;
+  return <BooksCardsLayout booksResponse={booksResponse} editButton={true} />;
 };
 export default MyBooks;

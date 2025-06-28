@@ -8,6 +8,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import EditPage from "./pages/EditPage";
 import CartPage from "./pages/CartPage";
 import MyBooksPage from "./pages/MyBooksPage";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/add-book" element={<AddBook />} />
           <Route path="/my-books" element={<MyBooksPage />} />
+          <Route path="/my-orders" element={<MyOrdersPage />} />
           <Route path="/book/edit/:id" element={<EditPage />} />
         </Route>
         <Route path="/cart" element={<CartPage />} />

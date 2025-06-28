@@ -1,8 +1,9 @@
+import FilterBadges from "@/components/FilterBadges/FilterBadges";
 import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
 import SearchBar from "@/components/SearchOptions/SearchBar";
 import SortBar from "@/components/SearchOptions/SortBar";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -17,6 +18,7 @@ const BooksPagesLayout = ({ children, heading }: Props) => {
       </div>
       <div className="flex flex-col gap-4">
         <SearchBar />
+        <FilterBadges/>
         <FiltersMobile />
         <div className="flex flex-wrap">
           <div className="flex flex-col w-full gap-4">

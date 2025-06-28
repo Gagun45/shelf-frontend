@@ -5,9 +5,13 @@ import type { BooksResponse } from "@/types/types";
 
 type Props = {
   booksResponse: BooksResponse;
+  editButton?: boolean;
 };
 
-const BooksCardsLayout = ({ booksResponse: { books, totalBooks } }: Props) => {
+const BooksCardsLayout = ({
+  booksResponse: { books, totalBooks },
+  editButton = false,
+}: Props) => {
   const { title, limit } = useSearch();
   const totalPages = Math.max(Math.ceil(totalBooks / limit), 1);
 
@@ -21,7 +25,7 @@ const BooksCardsLayout = ({ booksResponse: { books, totalBooks } }: Props) => {
         </div>
 
         {books?.map((book) => (
-          <BookCard key={book.bookPid} book={book} />
+          <BookCard key={book.bookPid} book={book} editButton={editButton} />
         ))}
       </div>
       <Pagination totalPages={totalPages} />

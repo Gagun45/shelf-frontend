@@ -1,10 +1,13 @@
 import { useBookById, useEditBook } from "@/api/books";
 import Loading from "./Loading";
 import { BookForm } from "./forms/addBookForm/BookForm";
+import { useUserData } from "@/hooks/useUserData";
+import { Navigate } from "react-router-dom";
 
 const EditBook = ({ bookPid }: { bookPid: string }) => {
   const { book, isLoading } = useBookById(bookPid);
   const { editBook, isPending } = useEditBook(bookPid);
+  const { userData } = useUserData();
 
   if (isLoading) {
     return <Loading />;
@@ -13,6 +16,7 @@ const EditBook = ({ bookPid }: { bookPid: string }) => {
   if (!book) {
     return <span>The book wasnt found</span>;
   }
+  if (userData?.userPid !== book.addedBy) return <Navigate to="/" />;
 
   return (
     <div className="flex flex-col gap-4">

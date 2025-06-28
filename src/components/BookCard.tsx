@@ -6,9 +6,10 @@ import { CheckIcon, ShoppingCartIcon } from "lucide-react";
 
 type Props = {
   book: BookType;
+  editButton?: boolean;
 };
 
-const BookCard = ({ book }: Props) => {
+const BookCard = ({ book, editButton }: Props) => {
   const { addItem, removeItem, cart } = useCartStore();
   return (
     <div className="flex flex-col w-34 xs:w-39 gap-1 border-1 px-4 py-2 shadow-2xl rounded-xl">
@@ -29,9 +30,7 @@ const BookCard = ({ book }: Props) => {
         {book.title}
       </Link>
 
-      <span className="w-full text-sm  italic line-clamp-2">
-        {book.author}
-      </span>
+      <span className="w-full text-sm  italic line-clamp-2">{book.author}</span>
       <span className="italic text-xs line-clamp-2">
         {book.language}, {book.publishYear}
       </span>
@@ -56,6 +55,11 @@ const BookCard = ({ book }: Props) => {
           </Button>
         )}
       </div>
+      {editButton && (
+        <Button asChild>
+          <Link to={`/book/edit/${book.bookPid}`}>Edit</Link>
+        </Button>
+      )}
     </div>
   );
 };

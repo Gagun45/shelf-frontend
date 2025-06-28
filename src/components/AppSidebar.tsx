@@ -13,7 +13,13 @@ import { Link } from "react-router-dom";
 
 import Auth from "./header/Auth";
 import type { ReactNode } from "react";
-import { BookA, BookOpen, BookPlusIcon, ShoppingCart } from "lucide-react";
+import {
+  BookA,
+  BookOpen,
+  BookPlusIcon,
+  ListOrderedIcon,
+  ShoppingCart,
+} from "lucide-react";
 import { Separator } from "./ui/separator";
 import { useUserData } from "@/hooks/useUserData";
 
@@ -39,6 +45,11 @@ const PROTECTED_LINKS: LinkInt[] = [
     icon: <BookPlusIcon className={iconSize} />,
     title: "Add a Book",
     to: "/add-book",
+  },
+  {
+    icon: <ListOrderedIcon className={iconSize} />,
+    title: "My Orders",
+    to: "/my-orders",
   },
 ];
 

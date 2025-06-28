@@ -26,7 +26,7 @@ export type NewBookType = {
 
 export type UserType = {
   userPid: string;
-  role: 'user' | 'admin'
+  role: "user" | "admin";
 };
 
 interface SortOptionInt {
@@ -41,3 +41,21 @@ export const AllSortOptions: SortOptionInt[] = [
   { title: "Price from low to high", value: "PriceAsc" },
   { title: "Price from high to low", value: "PriceDesc" },
 ];
+
+export interface BookOrderInterface {
+  title: string;
+  author: string;
+  price: number;
+  quantity: number;
+}
+
+export type OrderType = {
+  orderPid: string;
+  books: BookOrderInterface[];
+  totalPrice: number;
+};
+
+export interface OrderItemInterface {
+  bookPid: string;
+  quantity: number;
+}

@@ -21,7 +21,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { Separator } from "./ui/separator";
-import { useUserData } from "@/hooks/useUserData";
+import { useUserStore } from "@/stores/useUserStore";
 
 interface LinkInt {
   to: string;
@@ -54,7 +54,7 @@ const PROTECTED_LINKS: LinkInt[] = [
 ];
 
 export function AppSidebar() {
-  const { userData } = useUserData();
+  const { userData } = useUserStore();
   const { setOpenMobile, isMobile } = useSidebar();
 
   const handleOnClick = () => {

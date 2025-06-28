@@ -1,13 +1,13 @@
 import { useBookById, useEditBook } from "@/api/books";
 import Loading from "./Loading";
 import { BookForm } from "./forms/addBookForm/BookForm";
-import { useUserData } from "@/hooks/useUserData";
 import { Navigate } from "react-router-dom";
+import { useUserStore } from "@/stores/useUserStore";
 
 const EditBook = ({ bookPid }: { bookPid: string }) => {
   const { book, isLoading } = useBookById(bookPid);
   const { editBook, isPending } = useEditBook(bookPid);
-  const { userData } = useUserData();
+  const { userData } = useUserStore();
 
   if (isLoading) {
     return <Loading />;

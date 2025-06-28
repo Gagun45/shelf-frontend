@@ -1,8 +1,10 @@
 import { useCreateOrder } from "@/api/orders";
 import CartItem from "@/components/CartItem";
 import ClearCartAlert from "@/components/ClearCartAlert";
+import LoginPopUp from "@/components/LoginPopUp";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/useCartStore";
+import { useUserStore } from "@/stores/useUserStore";
 import type { OrderItemInterface } from "@/types/types";
 import { ShoppingBasketIcon } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -10,6 +12,7 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const { cart, totalSum } = useCartStore();
   const { createOrder } = useCreateOrder();
+  const { userData } = useUserStore();
 
   const isEnabled = cart.some((item) => item.quantity > 0);
 
@@ -48,9 +51,13 @@ const CartPage = () => {
         <span className="font-bold"> {totalSum}$</span>
       </span>
       <div className="flex justify-end">
-        <Button disabled={!isEnabled} onClick={handleSubmitCart}>
-          Order
-        </Button>
+        {userData ? (
+          <Button disabled={!isEnabled} onClick={handleSubmitCart}>
+            Order
+          </Button>
+        ) : (
+          <LoginPopUp />
+        )}
       </div>
     </div>
   );

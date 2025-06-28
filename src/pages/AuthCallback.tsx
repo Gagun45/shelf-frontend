@@ -10,24 +10,25 @@ const AuthCallback = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    const apiCall = async () => {
-      if (isAuthenticated && user) {
-        const token = await getAccessTokenSilently();
-        const res = await fetch(`${API_BASE_URL}/auth/create-user`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: user.email }),
-        });
-        if (!res.ok) {
-          logout();
-        }
-      }
-      navigate("/");
-    };
-    apiCall();
+    // const apiCall = async () => {
+    //   if (isAuthenticated && user) {
+    //     const token = await getAccessTokenSilently();
+    //     const res = await fetch(`${API_BASE_URL}/auth/create-user`, {
+    //       method: "POST",
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({ email: user.email }),
+    //     });
+    //     if (!res.ok) {
+    //       logout();
+    //     }
+    //   }
+    //   navigate("/");
+    // };
+    navigate("/");
+    // apiCall();
   }, [
     user,
     isAuthenticated,

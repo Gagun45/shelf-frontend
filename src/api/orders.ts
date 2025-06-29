@@ -20,12 +20,12 @@ export const useMyOrders = () => {
     return res.json();
   };
 
-  const { data: orders } = useQuery({
+  const { data: orders, isLoading } = useQuery({
     queryKey: ["myOrders"],
     queryFn: fetchMyOrders,
   });
 
-  return { orders };
+  return { orders, isLoading };
 };
 
 export const useCreateOrder = () => {

@@ -13,7 +13,9 @@ export const useUserStore = create<UserStore>()(
     (set) => ({
       userData: null,
       setUserData: (data) => set({ userData: data }),
-      clearUserData: () => set({ userData: null }),
+      clearUserData: () => {
+        set({ userData: null });
+      },
     }),
     { name: "user-storage", storage: createJSONStorage(() => localStorage) }
   )

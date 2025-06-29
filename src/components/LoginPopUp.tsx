@@ -12,6 +12,7 @@ import { useUserStore } from "@/stores/useUserStore";
 import { Button } from "./ui/button";
 import Loading from "./Loading";
 import { toast } from "sonner";
+import { XIcon } from "lucide-react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -25,11 +26,13 @@ const LoginPopUp = () => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            Logging in...
-            <span onClick={() => setOpen(false)}>X</span>
+          <AlertDialogTitle className="flex flex-wrap relative">
+            <Loading />
+            <Button className="absolute top-0 right-0" onClick={() => setOpen(false)}>
+              <XIcon />
+            </Button>
           </AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogDescription className="text-center">
             Keep the window open until the login process is done. Closing this
             window will prevent login proccess to be finished
           </AlertDialogDescription>
@@ -100,5 +103,5 @@ const ProcessPopUp = ({
     setOpen,
   ]);
 
-  if (loading) return <Loading />;
+  if (loading) return <span className="text-center">Fetching user data...</span>;
 };

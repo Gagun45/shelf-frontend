@@ -59,7 +59,6 @@ export function AppSidebar() {
 
   const handleOnClick = () => {
     if (isMobile) setOpenMobile(false);
-    return;
   };
   return (
     <Sidebar>

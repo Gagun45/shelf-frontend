@@ -1,4 +1,5 @@
 import { useMyOrders } from "@/api/orders";
+import Loading from "@/components/Loading";
 import {
   Accordion,
   AccordionContent,
@@ -15,11 +16,16 @@ import {
 import type { OrderType } from "@/types/types";
 
 const MyOrdersPage = () => {
-  const { orders } = useMyOrders();
+  const { orders, isLoading } = useMyOrders();
+
+  if (isLoading) return <Loading />;
+
+  if (orders?.length === 0)
+    return <div className="title">You have no orders yet!</div>;
 
   return (
     <div className="space-y-4">
-      <div className="title">MyOrders: {orders?.length ?? 0}</div>
+      <div className="title">My Orders: {orders?.length ?? 0}</div>
       <Accordion type="single" collapsible className="flex flex-col gap-4">
         {orders?.map((order) => (
           <OrderComponent key={order.orderPid} order={order} />

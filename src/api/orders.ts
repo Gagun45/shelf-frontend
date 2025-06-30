@@ -51,7 +51,7 @@ export const useCreateOrder = () => {
     isError,
   } = useMutation({ mutationFn: createAnOrder });
   useEffect(() => {
-    toast.error("Something went wrong");
+    if (isError) toast.error("Something went wrong");
   }, [isError]);
 
   useEffect(() => {

@@ -1,19 +1,21 @@
 import { useSearchStore } from "@/stores/useSearchStore";
 import { useMemo } from "react";
-import {useShallow} from 'zustand/react/shallow'
+import { useShallow } from "zustand/react/shallow";
 
 export const useSearchQuery = () => {
   const { title, year, genres, languages, limit, page, price, sortOption } =
-    useSearchStore(useShallow((state) => ({
-      title: state.title,
-      year: state.year,
-      genres: state.genres,
-      languages: state.languages,
-      limit: state.limit,
-      page: state.page,
-      price: state.price,
-      sortOption: state.sortOption,
-    })));
+    useSearchStore(
+      useShallow((state) => ({
+        title: state.title,
+        year: state.year,
+        genres: state.genres,
+        languages: state.languages,
+        limit: state.limit,
+        page: state.page,
+        price: state.price,
+        sortOption: state.sortOption,
+      }))
+    );
 
   const queryString = useMemo(() => {
     const queryParts: string[] = [];
@@ -31,12 +33,12 @@ export const useSearchQuery = () => {
       queryParts.push(`genres=${genres.join(",")}`);
     }
     if (languages && languages.length > 0 && languages.length !== 3) {
-      queryParts.push(`language=${languages.join(",")}`);
+      queryParts.push(`languages=${languages.join(",")}`);
     }
     queryParts.push(`page=${page}`);
     queryParts.push(`limit=${limit}`);
 
-    const result = queryParts.join("&");
+    const result = queryParts.join("&").replace(" ", "%20");
     return result;
   }, [
     title,

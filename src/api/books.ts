@@ -10,6 +10,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useAllBooks = () => {
   const searchQuery = useSearchQuery();
+  useEffect(() => {
+    console.log(searchQuery);
+  });
   const route = `${API_BASE_URL}/books/all?${searchQuery}`;
   const fetchBooks = async (): Promise<BooksResponse> => {
     const res = await fetch(route);
@@ -17,7 +20,7 @@ export const useAllBooks = () => {
     return res.json();
   };
 
-  const { data: booksResponse, isLoading,  } = useQuery({
+  const { data: booksResponse, isLoading } = useQuery({
     queryKey: ["books", searchQuery],
     queryFn: fetchBooks,
   });

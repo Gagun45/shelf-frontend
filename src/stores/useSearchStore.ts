@@ -15,7 +15,6 @@ interface SearchStore {
   setGenres: (genres: string[]) => void;
   languages: string[];
   setLanguages: (languages: string[]) => void;
-  searchQuery: string;
   page: number;
   limit: number;
   setPage: (page: number) => void;
@@ -47,5 +46,4 @@ export const useSearchStore = create<SearchStore>((set) => ({
       price: { fromPrice: 0, toPrice: 20000 },
       languages: LANGUAGES,
     }),
-  searchQuery: "",
 }));

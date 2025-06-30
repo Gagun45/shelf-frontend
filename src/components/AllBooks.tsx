@@ -6,6 +6,7 @@ import BooksCardsLayout from "@/layouts/BooksCardsLayout";
 
 const AllBooks = () => {
   const { booksResponse, isLoading } = useAllBooks();
+
   if (isLoading) {
     return <Loading />;
   }

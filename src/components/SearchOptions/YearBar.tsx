@@ -1,44 +1,42 @@
-import { useSearch } from "@/context/SearchContext";
+import { useEffect, useState } from "react";
 import { Slider } from "../ui/slider";
+import { useSearchStore } from "@/stores/useSearchStore";
 
 const YearBar = () => {
-  const { year, setYear } = useSearch();
+  const year = useSearchStore((s) => s.year);
+  const setYear = useSearchStore((s) => s.setYear);
+
+  const [localYear, setLocalYear] = useState<number[]>([
+    year.fromYear,
+    year.toYear,
+  ]);
+
+  useEffect(() => {
+    setLocalYear([year.fromYear, year.toYear]);
+  }, [year.toYear, year.fromYear]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setYear(localYear[0], localYear[1]);
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [localYear, setLocalYear, setYear]);
 
   return (
     <div>
       <h2 className="font-bold">Publish Year:</h2>
       <div className="grid grid-cols-[40px_200px_40px] xl:grid-cols-[40px_80px_40px] gap-2">
-        <span className="text-right">{year.fromYear}</span>
+        <span className="text-right">{localYear[0]}</span>
         <Slider
-          value={[year.fromYear, year.toYear]}
+          value={[localYear[0], localYear[1]]}
           min={1980}
           max={2025}
           step={1}
           className="w-full"
-          onValueChange={(val) => setYear({ fromYear: val[0], toYear: val[1] })}
+          onValueChange={(val) => setLocalYear([val[0], val[1]])}
         />
-        <span>{year.toYear}</span>
+        <span>{localYear[1]}</span>
       </div>
-      {/* <div className="flex items-center gap-2">
-        From
-        <input
-          className="border-1 w-24 px-2 rounded-md"
-          type="number"
-          value={year.fromYear}
-          onChange={(e) =>
-            setYear((prev) => ({ ...prev, fromYear: parseInt(e.target.value) }))
-          }
-        />
-        to
-        <input
-          className="border-1 w-24 px-2 rounded-md"
-          type="number"
-          value={year.toYear}
-          onChange={(e) =>
-            setYear((prev) => ({ ...prev, toYear: parseInt(e.target.value) }))
-          }
-        />
-      </div> */}
     </div>
   );
 };

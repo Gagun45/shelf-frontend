@@ -59,3 +59,13 @@ export interface OrderItemInterface {
   bookPid: string;
   quantity: number;
 }
+
+export type SearchYear = {
+  fromYear: number;
+  toYear: number;
+};
+
+export type SearchPrice = {
+  fromPrice: number;
+  toPrice: number;
+};

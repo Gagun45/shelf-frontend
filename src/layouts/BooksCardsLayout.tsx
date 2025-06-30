@@ -1,6 +1,6 @@
 import BookCard from "@/components/BookCard";
 import Pagination from "@/components/SearchOptions/Pagination";
-import { useSearch } from "@/context/SearchContext";
+import { useSearchStore } from "@/stores/useSearchStore";
 import type { BooksResponse } from "@/types/types";
 
 type Props = {
@@ -12,7 +12,8 @@ const BooksCardsLayout = ({
   booksResponse: { books, totalBooks },
   editButton = false,
 }: Props) => {
-  const { title, limit } = useSearch();
+  const limit = useSearchStore((state) => state.limit);
+  const title = useSearchStore((state) => state.title);
   const totalPages = Math.max(Math.ceil(totalBooks / limit), 1);
 
   return (

@@ -1,7 +1,8 @@
-import { useSearch } from "@/context/SearchContext";
+import { useSearchStore } from "@/stores/useSearchStore";
 
 const BooksOnPage = () => {
-  const { limit, setLimit } = useSearch();
+  const limit = useSearchStore(state=>state.limit)
+  const setLimit = useSearchStore(state=>state.setLimit)
   return (
     <select value={limit} onChange={(e) => setLimit(parseInt(e.target.value))}>
       <option value={5}>5</option>

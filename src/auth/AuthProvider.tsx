@@ -8,6 +8,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
   const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 
+
   const navigate = useNavigate();
   const onRedirectCallback = () => {
     navigate("/auth-callback");

@@ -1,6 +1,6 @@
-import { useSearch } from "@/context/SearchContext";
 import { Button } from "../ui/button";
 import { useEffect } from "react";
+import { useSearchStore } from "@/stores/useSearchStore";
 
 type Props = {
   totalPages: number;
@@ -41,7 +41,8 @@ const Pagination = ({ totalPages }: Props) => {
     }
     return returnJsx(result);
   };
-  const { page, setPage } = useSearch();
+   const page = useSearchStore((s) => s.page);
+   const setPage = useSearchStore((s) => s.setPage);
   useEffect(() => {
     if (page > totalPages) {
       setPage(1);
@@ -50,14 +51,11 @@ const Pagination = ({ totalPages }: Props) => {
 
   return (
     <div className="flex items-center justify-between gap-4">
-      <Button onClick={() => setPage((prev) => prev - 1)} disabled={page === 1}>
+      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
         Prev
       </Button>
       <div className="flex gap-2">{createPagination()}</div>
-      <Button
-        onClick={() => setPage((prev) => prev + 1)}
-        disabled={page === totalPages}
-      >
+      <Button onClick={() => setPage(page + 1)} disabled={page === totalPages}>
         Next
       </Button>
     </div>

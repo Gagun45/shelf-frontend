@@ -1,4 +1,3 @@
-import { useSearch } from "@/context/SearchContext";
 import GenresBar from "./SearchOptions/GenresBar";
 import LanguageBar from "./SearchOptions/LanguageBar";
 import { PriceBar } from "./SearchOptions/PriceBar";
@@ -10,9 +9,10 @@ import {
   AccordionTrigger,
 } from "./ui/accordion";
 import { Button } from "./ui/button";
+import { useSearchStore } from "@/stores/useSearchStore";
 
 const FiltersMobile = () => {
-  const {resetFilters} = useSearch()
+  const resetFilters = useSearchStore((state) => state.resetFilters);
   return (
     <div className="flex flex-col xl:hidden gap-4">
       <Accordion type="single" collapsible>

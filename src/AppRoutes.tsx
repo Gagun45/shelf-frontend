@@ -9,6 +9,7 @@ import EditPage from "./pages/EditPage";
 import CartPage from "./pages/CartPage";
 import MyBooksPage from "./pages/MyBooksPage";
 import MyOrdersPage from "./pages/MyOrdersPage";
+import TestPage from "./pages/TestPage";
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="/auth-callback" element={<AuthCallback />} />
         <Route path="/book" element={<BookPage />} />
+        <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Route>
     </Routes>

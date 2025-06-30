@@ -1,4 +1,4 @@
-import { useSearch } from "@/context/SearchContext";
+import { useSearchQuery } from "@/hooks/useSearchQuery";
 import type { BooksResponse, BookType } from "@/types/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -8,9 +8,8 @@ import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-
 export const useAllBooks = () => {
-  const { searchQuery } = useSearch();
+  const searchQuery = useSearchQuery();
   const route = `${API_BASE_URL}/books/all?${searchQuery}`;
   const fetchBooks = async (): Promise<BooksResponse> => {
     const res = await fetch(route);
@@ -18,7 +17,7 @@ export const useAllBooks = () => {
     return res.json();
   };
 
-  const { data: booksResponse, isLoading } = useQuery({
+  const { data: booksResponse, isLoading,  } = useQuery({
     queryKey: ["books", searchQuery],
     queryFn: fetchBooks,
   });
@@ -67,11 +66,15 @@ export const useAddBook = () => {
     mutationFn: addBookRequest,
   });
 
-  if (isSuccess) {
-    toast.success("Book added!");
-    navigate("/");
-  }
-  if (isError) toast.error("Something went wrong");
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Book added!");
+      navigate("/");
+    }
+  }, [isSuccess, navigate]);
+  useEffect(() => {
+    toast.error("Something went wrong");
+  }, [isError]);
 
   return { addBook, isPending };
 };
@@ -109,15 +112,16 @@ export const useEditBook = (bookPid: string) => {
       navigate("/");
     }
   }, [isSuccess, navigate, queryClient, bookPid]);
-
-  if (isError) toast.error("Something went wrong");
+  useEffect(() => {
+    toast.error("Something went wrong");
+  }, [isError]);
 
   return { editBook, isPending };
 };
 
 export const useMyBooks = () => {
   const { getAccessTokenSilently } = useAuth0();
-  const { searchQuery } = useSearch();
+  const searchQuery = useSearchQuery();
   const fetchMyBooks = async (): Promise<BooksResponse> => {
     const token = await getAccessTokenSilently();
     const res = await fetch(`${API_BASE_URL}/books/my-books?${searchQuery}`, {

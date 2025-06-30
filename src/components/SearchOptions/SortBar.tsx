@@ -1,4 +1,3 @@
-import { useSearch } from "@/context/SearchContext";
 import { AllSortOptions } from "@/types/types";
 import {
   Select,
@@ -8,9 +7,12 @@ import {
   SelectValue,
 } from "../ui/select";
 import BooksOnPage from "./BooksOnPage";
+import { useSearchStore } from "@/stores/useSearchStore";
 
 const SortBar = () => {
-  const { sortOption, setSortOption } = useSearch();
+  const sortOption = useSearchStore((state) => state.sortOption);
+  const setSortOption = useSearchStore((state) => state.setSortOption);
+
   return (
     <div className="flex items-center gap-1">
       <BooksOnPage />

@@ -1,37 +1,38 @@
-import { useSearch } from "@/context/SearchContext";
-import { Button } from "../ui/button";
-import { useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { XCircle } from "lucide-react";
+import { useSearchStore } from "@/stores/useSearchStore";
 
-const SearchBar = () => {
-  const { title, setTitle } = useSearch();
-  const [t, setT] = useState(title);
+const SearchBar = memo(() => {
+  const title = useSearchStore((state) => state.title);
+  const setTitle = useSearchStore((state) => state.setTitle);
+  const [localTitle, setLocalTitle] = useState(title);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setTitle(localTitle);
+    }, 500);
+    return () => clearTimeout(timeoutId);
+  }, [localTitle, setLocalTitle, setTitle]);
+
   return (
-    <form
-      className="w-full max-w-2xl flex items-center justify-between border-2 gap-1 rounded-lg p-2"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setTitle(t);
-      }}
-    >
+    <div className="w-full max-w-2xl flex items-center justify-between border-2 gap-1 rounded-lg p-2">
       <input
         className="w-full outline-none"
-        value={t}
-        onChange={(e) => setT(e.target.value)}
+        placeholder="Search..."
+        value={localTitle}
+        onChange={(e) => setLocalTitle(e.target.value)}
       />
       <button
         type="button"
-        disabled={!t}
+        disabled={!localTitle}
         onClick={() => {
-          setT("");
-          setTitle("");
+          setLocalTitle("");
         }}
         className="not-disabled:cursor-pointer disabled:opacity-15"
       >
         <XCircle />
       </button>
-      <Button type="submit">Search</Button>
-    </form>
+    </div>
   );
-};
+});
 export default SearchBar;

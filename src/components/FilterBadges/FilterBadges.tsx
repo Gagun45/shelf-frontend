@@ -13,7 +13,7 @@ const FilterBadges = () => {
         <Button
           className="bg-purple-800"
           key={genre}
-          onClick={() => setGenres(genre)}
+          onClick={() => setGenres(genres.filter((g) => g !== genre))}
         >
           {genre}
         </Button>
@@ -23,7 +23,7 @@ const FilterBadges = () => {
           <Button
             className="bg-yellow-800"
             key={lang}
-            onClick={() => setLanguages(lang)}
+            onClick={() => setLanguages(languages.filter((l) => l !== lang))}
           >
             {lang}
           </Button>

@@ -76,7 +76,7 @@ export const useAddBook = () => {
     }
   }, [isSuccess, navigate]);
   useEffect(() => {
-    toast.error("Something went wrong");
+    if (isError) toast.error("Something went wrong");
   }, [isError]);
 
   return { addBook, isPending };
@@ -116,7 +116,7 @@ export const useEditBook = (bookPid: string) => {
     }
   }, [isSuccess, navigate, queryClient, bookPid]);
   useEffect(() => {
-    toast.error("Something went wrong");
+    if (isError) toast.error("Something went wrong");
   }, [isError]);
 
   return { editBook, isPending };

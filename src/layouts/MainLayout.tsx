@@ -9,6 +9,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   const { isAuthenticated, isLoading } = useAuth0();
   const { clearUserData, userData } = useUserStore();
+
   useEffect(() => {
     if (isLoading) return;
     if (!isAuthenticated) clearUserData();

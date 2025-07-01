@@ -3,7 +3,7 @@ import type { BookType } from "@/types/types";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { CheckIcon, ShoppingCartIcon } from "lucide-react";
-import DeleteBookAlert from "./deleteBookAlert";
+import DeleteBookAlert from "./DeleteBookAlert";
 
 type Props = {
   book: BookType;

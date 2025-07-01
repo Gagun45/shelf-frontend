@@ -8,18 +8,17 @@ import {
 
 import Auth from "../header/Auth";
 import { Separator } from "../ui/separator";
-import { useUserStore } from "@/stores/useUserStore";
 import AppSidebarHeader from "./AppSidebarHeader";
 import AppSidebarPublicLinks from "./AppSidebarLinks/AppSidebarPublicLinks";
 import AppSidebarUserLinks from "./AppSidebarLinks/AppSidebarUserLinks";
 import AppSidebarAdminLinks from "./AppSidebarLinks/AppSidebarAdminLinks";
 import AppSidebarSuperadminLinks from "./AppSidebarLinks/AppSidebarSuperadminLinks";
 import AppSidebarCartLink from "./AppSidebarLinks/AppSidebarCartLink";
+import type { RoleType } from "@/types/types";
 
 export const ICON_SIZE = "size-7";
 
-export function AppSidebar() {
-  const role = useUserStore((state) => state.userData?.role);
+const AppSidebar = ({ role }: { role?: RoleType }) => {
   const { setOpenMobile, isMobile } = useSidebar();
 
   const handleOnClick = () => {
@@ -34,9 +33,12 @@ export function AppSidebar() {
       <SidebarContent className="bg-main p-2">
         <AppSidebarPublicLinks handleOnClick={handleOnClick} />
         <AppSidebarUserLinks handleOnClick={handleOnClick} role={role} />
-        <AppSidebarAdminLinks handleOnClick={handleOnClick} role={role} />
-        <AppSidebarSuperadminLinks handleOnClick={handleOnClick} role={role} />
-        <div className="mt-auto">
+        <div className="mt-auto space-y-2">
+          <AppSidebarAdminLinks handleOnClick={handleOnClick} role={role} />
+          <AppSidebarSuperadminLinks
+            handleOnClick={handleOnClick}
+            role={role}
+          />
           <AppSidebarCartLink handleOnClick={handleOnClick} />
         </div>
       </SidebarContent>
@@ -45,4 +47,6 @@ export function AppSidebar() {
       </SidebarFooter>
     </Sidebar>
   );
-}
+};
+
+export default AppSidebar;

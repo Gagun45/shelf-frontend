@@ -10,7 +10,7 @@ const AppSidebarLinksLayout = ({
   handleOnClick: () => void;
 }) => {
   return (
-    <SidebarGroup className="gap-4">
+    <SidebarGroup className="gap-6">
       {links.map(({ icon, title, to }) => (
         <AppSidebarLink
           key={title}

@@ -26,9 +26,9 @@ const OrderCardContentTitle = ({
     <CardTitle className="grid grid-cols-[1fr_100px]">
       <span>Order #{orderPid}</span>
       <span
-        className={`${orderStatusClassName} px-2 py-0.5 w-fit rounded-md flex items-center justify-center`}
+        className={`${orderStatusClassName} px-2 py-0.5 rounded-md flex items-center justify-center`}
       >
-        {status}
+        {`${status[0].toLocaleUpperCase()}${status.slice(1)}`}
       </span>
     </CardTitle>
   );

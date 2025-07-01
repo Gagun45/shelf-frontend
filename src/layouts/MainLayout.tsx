@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/AppSidebar/AppSidebar";
+import AppSidebar from "@/components/AppSidebar/AppSidebar";
 import Header from "@/components/Header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useUserStore } from "@/stores/useUserStore";
@@ -8,14 +8,14 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   const { isAuthenticated, isLoading } = useAuth0();
-  const { clearUserData } = useUserStore();
+  const { clearUserData, userData } = useUserStore();
   useEffect(() => {
     if (isLoading) return;
     if (!isAuthenticated) clearUserData();
   }, [isAuthenticated, clearUserData, isLoading]);
   return (
     <SidebarProvider open={true}>
-      <AppSidebar />
+      <AppSidebar role={userData?.role} />
       <div className="min-h-screen w-screen">
         <Header />
         <main>

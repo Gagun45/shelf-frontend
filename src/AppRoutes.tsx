@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
-import Homepage from "./pages/Homepage";
 import AddBook from "./pages/AddBook";
 import BookPage from "./pages/BookPage";
 import EditPage from "./pages/EditPage";
@@ -12,6 +11,7 @@ import AdminOnlyRoute from "./auth/AdminOnlyRoute";
 import LoggedOnlyRoute from "./auth/LoggedOnlyRoute";
 import SuperAdminOnlyRoute from "./auth/SuperAdminOnlyRoute";
 import AllOrdersPage from "./pages/AllOrdersPage";
+import AllBooksPage from "./pages/AllBooksPage";
 
 const AppRoutes = () => {
   return (
@@ -29,7 +29,7 @@ const AppRoutes = () => {
           <Route path="/all-orders" element={<AllOrdersPage />} />
         </Route>
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<AllBooksPage />} />
         <Route path="/book" element={<BookPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<Navigate to={"/"} />} />

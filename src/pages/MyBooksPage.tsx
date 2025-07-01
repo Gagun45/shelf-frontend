@@ -1,5 +1,4 @@
-import MyBooks from "@/components/MyBooks";
-
+import MyBooks from "@/components/MyBooks/MyBooks";
 import BooksPagesLayout from "@/layouts/BooksPagesLayout";
 
 const MyBooksPage = () => {

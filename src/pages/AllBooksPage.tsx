@@ -1,11 +1,11 @@
-import AllBooks from "@/components/AllBooks";
+import AllBooks from "@/components/AllBooks/AllBooks";
 import BooksPagesLayout from "@/layouts/BooksPagesLayout";
 
-const Homepage = () => {
+const AllBooksPage = () => {
   return (
     <BooksPagesLayout heading="All books">
       <AllBooks />
     </BooksPagesLayout>
   );
 };
-export default Homepage;
+export default AllBooksPage;

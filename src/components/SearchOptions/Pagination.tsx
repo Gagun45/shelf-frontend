@@ -49,12 +49,14 @@ const Pagination = ({ totalPages }: Props) => {
     }
   }, [totalPages, page, setPage]);
 
+  const pagination = createPagination()
+
   return (
     <div className="flex items-center justify-between gap-4">
       <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
         Prev
       </Button>
-      <div className="flex gap-2">{createPagination()}</div>
+      <div className="flex gap-2">{pagination}</div>
       <Button onClick={() => setPage(page + 1)} disabled={page === totalPages}>
         Next
       </Button>

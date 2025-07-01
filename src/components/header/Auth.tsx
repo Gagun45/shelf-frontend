@@ -14,7 +14,7 @@ const Auth = ({ withText = true }: { withText?: boolean }) => {
     <>
       {userData ? (
         <Button
-          className="w-fit bg-destructive hover:bg-destructive"
+          className="bg-destructive hover:bg-destructive"
           onClick={() => {
             clearUserData();
             logout({ logoutParams: { returnTo } });

@@ -1,19 +1,14 @@
-import BookCard from "@/components/BookCard";
 import Pagination from "@/components/SearchOptions/Pagination";
 import { useSearchStore } from "@/stores/useSearchStore";
-import type { BooksResponse } from "@/types/types";
-
-type Props = {
-  booksResponse: BooksResponse;
-  editButton?: boolean;
-  deleteButton?: boolean;
-};
+import type { ReactNode } from "react";
 
 const BooksCardsLayout = ({
-  booksResponse: { books, totalBooks },
-  editButton = false,
-  deleteButton = false,
-}: Props) => {
+  children,
+  totalBooks,
+}: {
+  children: ReactNode;
+  totalBooks: number;
+}) => {
   const limit = useSearchStore((state) => state.limit);
   const title = useSearchStore((state) => state.title);
   const totalPages = Math.max(Math.ceil(totalBooks / limit), 1);
@@ -27,14 +22,7 @@ const BooksCardsLayout = ({
             : `${totalBooks} results found`}
         </div>
 
-        {books?.map((book) => (
-          <BookCard
-            key={book.bookPid}
-            book={book}
-            editButton={editButton}
-            deleteButton={deleteButton}
-          />
-        ))}
+        {children}
       </div>
       <Pagination totalPages={totalPages} />
     </div>

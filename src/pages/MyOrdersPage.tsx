@@ -1,24 +1,10 @@
-import { useMyOrders } from "@/api/orders";
-import Loading from "@/components/Loading";
-import OrderComponent from "@/components/OrderComponent";
-import { Accordion } from "@/components/ui/accordion";
+import MyOrders from "@/components/MyOrders/MyOrders";
 
 const MyOrdersPage = () => {
-  const { orders, isLoading } = useMyOrders();
-
-  if (isLoading) return <Loading />;
-
-  if (!orders || orders?.length === 0)
-    return <div className="title">You have no orders yet!</div>;
-
   return (
-    <div className="space-y-4">
-      <div className="title">My Orders: {orders.length}</div>
-      <Accordion type="single" collapsible className="flex flex-col gap-4">
-        {orders?.map((order) => (
-          <OrderComponent key={order.orderPid} order={order} />
-        ))}
-      </Accordion>
+    <div className="flex flex-col gap-4">
+      <h2 className="title">My Orders</h2>
+      <MyOrders />
     </div>
   );
 };

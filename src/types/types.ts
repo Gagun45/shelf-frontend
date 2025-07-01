@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type BookType = {
   title: string;
   author: string;
@@ -26,7 +28,7 @@ export type NewBookType = {
 
 export type UserType = {
   userPid: string;
-  role: "user" | "admin" | "superadmin";
+  role: RoleType;
 };
 
 interface SortOptionInt {
@@ -72,3 +74,11 @@ export type SearchPrice = {
   fromPrice: number;
   toPrice: number;
 };
+
+export interface LinkInt {
+  to: string;
+  title: string;
+  icon: ReactNode;
+}
+
+export type RoleType = "user" | "admin" | "superadmin";

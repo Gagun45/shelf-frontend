@@ -1,6 +1,7 @@
 import { useMyBooks } from "@/api/books";
-import Loading from "./Loading";
 import BooksCardsLayout from "@/layouts/BooksCardsLayout";
+import Loading from "../Loading";
+import MyBooksCard from "./MyBooksCard";
 
 const MyBooks = () => {
   const { booksResponse, isLoading } = useMyBooks();
@@ -11,12 +12,13 @@ const MyBooks = () => {
     return <span>No books found</span>;
   }
 
+  const { books, totalBooks } = booksResponse;
   return (
-    <BooksCardsLayout
-      booksResponse={booksResponse}
-      editButton={true}
-      deleteButton={true}
-    />
+    <BooksCardsLayout totalBooks={totalBooks}>
+      {books?.map((book) => (
+        <MyBooksCard key={book.bookPid} book={book} />
+      ))}
+    </BooksCardsLayout>
   );
 };
 export default MyBooks;

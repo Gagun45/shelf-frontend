@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Homepage from "./pages/Homepage";
-import AuthCallback from "./pages/AuthCallback";
 import AddBook from "./pages/AddBook";
 import BookPage from "./pages/BookPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -23,7 +22,6 @@ const AppRoutes = () => {
         </Route>
         <Route path="/cart" element={<CartPage />} />
         <Route path="/" element={<Homepage />} />
-        <Route path="/auth-callback" element={<AuthCallback />} />
         <Route path="/book" element={<BookPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<Navigate to={"/"} />} />

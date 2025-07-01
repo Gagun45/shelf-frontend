@@ -10,7 +10,6 @@ const BookPage = () => {
   const id = searchParams.get("id");
   const { book, isLoading } = useBookById(id as string);
   const { addItem, cart, removeItem } = useCartStore();
-  // const { userData } = useUserData();
   if (isLoading) return <Loading />;
   if (!book) return <div>Book not found</div>;
   const genresAsString = book.genres.join(", ");

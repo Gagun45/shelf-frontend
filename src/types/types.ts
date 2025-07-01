@@ -26,7 +26,7 @@ export type NewBookType = {
 
 export type UserType = {
   userPid: string;
-  role: "user" | "admin";
+  role: "user" | "admin" | "superadmin";
 };
 
 interface SortOptionInt {
@@ -49,10 +49,13 @@ export interface BookOrderInterface {
   quantity: number;
 }
 
+export type StatusType = "pending" | "success" | "cancelled";
+
 export type OrderType = {
   orderPid: string;
   books: BookOrderInterface[];
   totalPrice: number;
+  status: StatusType;
 };
 
 export interface OrderItemInterface {

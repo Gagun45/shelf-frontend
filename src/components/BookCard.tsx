@@ -3,13 +3,15 @@ import type { BookType } from "@/types/types";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { CheckIcon, ShoppingCartIcon } from "lucide-react";
+import DeleteBookAlert from "./deleteBookAlert";
 
 type Props = {
   book: BookType;
   editButton?: boolean;
+  deleteButton?: boolean;
 };
 
-const BookCard = ({ book, editButton }: Props) => {
+const BookCard = ({ book, editButton, deleteButton }: Props) => {
   const { addItem, removeItem, cart } = useCartStore();
   return (
     <div className="flex flex-col w-34 xs:w-39 gap-1 border-1 px-4 py-2 shadow-2xl rounded-xl">
@@ -60,6 +62,7 @@ const BookCard = ({ book, editButton }: Props) => {
           <Link to={`/book/edit/${book.bookPid}`}>Edit</Link>
         </Button>
       )}
+      {deleteButton && <DeleteBookAlert bookPid={book.bookPid} />}
     </div>
   );
 };

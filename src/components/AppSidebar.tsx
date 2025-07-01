@@ -12,11 +12,12 @@ import logo from "@/assets/Logo.png";
 import { Link } from "react-router-dom";
 
 import Auth from "./header/Auth";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import {
   BookA,
   BookOpen,
   BookPlusIcon,
+  KeyIcon,
   ListOrderedIcon,
   ShoppingCart,
 } from "lucide-react";
@@ -31,25 +32,36 @@ interface LinkInt {
 
 const iconSize = "size-7";
 
-const USER_LINKS: LinkInt[] = [
+const PUBLIC_LINKS: LinkInt[] = [
   { icon: <BookA className={iconSize} />, title: "All Books", to: "/" },
 ];
 
-const PROTECTED_LINKS: LinkInt[] = [
+const LOGGED_LINKS: LinkInt[] = [
   {
-    icon: <BookOpen className={iconSize} />,
-    title: "My Books",
-    to: "/my-books",
+    icon: <ListOrderedIcon className={iconSize} />,
+    title: "My Orders",
+    to: "/my-orders",
   },
+];
+
+const ADMIN_LINKS: LinkInt[] = [
   {
     icon: <BookPlusIcon className={iconSize} />,
     title: "Add a Book",
     to: "/add-book",
   },
   {
-    icon: <ListOrderedIcon className={iconSize} />,
-    title: "My Orders",
-    to: "/my-orders",
+    icon: <BookOpen className={iconSize} />,
+    title: "My Books",
+    to: "/my-books",
+  },
+];
+
+const SUPERADMIN_LINKS: LinkInt[] = [
+  {
+    icon: <KeyIcon className={iconSize} />,
+    title: "All Orders",
+    to: "/all-orders",
   },
 ];
 
@@ -70,45 +82,54 @@ export function AppSidebar() {
       <Separator />
       <SidebarContent className="bg-main p-2">
         <SidebarGroup className="gap-4">
-          {USER_LINKS.map(({ icon, title, to }) => (
-            <Link
-              to={to}
+          {PUBLIC_LINKS.map(({ icon, title, to }) => (
+            <SidebarLink
               key={title}
-              className="flex gap-2 hover:underline items-center justify-start"
-              onClick={handleOnClick}
-            >
-              {icon}
-              <span className="text-2xl tracking-wide font-semibold">
-                {title}
-              </span>
-            </Link>
+              to={to}
+              icon={icon}
+              title={title}
+              handleOnClick={handleOnClick}
+            />
           ))}
         </SidebarGroup>
         <SidebarGroup className="gap-6 mt-auto">
           {userData &&
-            PROTECTED_LINKS.map(({ icon, title, to }) => (
-              <Link
-                to={to}
+            LOGGED_LINKS.map(({ icon, title, to }) => (
+              <SidebarLink
                 key={title}
-                className="flex gap-2 hover:underline items-center justify-start"
-                onClick={handleOnClick}
-              >
-                {icon}
-                <span className="text-2xl tracking-wide font-semibold">
-                  {title}
-                </span>
-              </Link>
+                to={to}
+                icon={icon}
+                title={title}
+                handleOnClick={handleOnClick}
+              />
             ))}
-          <Link
+          {userData?.role === "admin" &&
+            ADMIN_LINKS.map(({ icon, title, to }) => (
+              <SidebarLink
+                key={title}
+                to={to}
+                icon={icon}
+                title={title}
+                handleOnClick={handleOnClick}
+              />
+            ))}
+          {userData?.role === "superadmin" &&
+            SUPERADMIN_LINKS.map(({ icon, title, to }) => (
+              <SidebarLink
+                key={title}
+                to={to}
+                icon={icon}
+                title={title}
+                handleOnClick={handleOnClick}
+              />
+            ))}
+
+          <SidebarLink
             to={"/cart"}
-            className="flex gap-2 hover:underline items-center justify-start"
-            onClick={handleOnClick}
-          >
-            <ShoppingCart className="size-7" />
-            <span className="text-2xl tracking-wide font-semibold">
-              My Cart
-            </span>
-          </Link>
+            icon={<ShoppingCart className="size-7" />}
+            title={"My Cart"}
+            handleOnClick={handleOnClick}
+          />
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="bg-main h-24 justify-end">
@@ -117,3 +138,24 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
+type SidebarLinkProps = {
+  to: string;
+  handleOnClick: () => void;
+  title: string;
+  icon: ReactNode;
+};
+
+const SidebarLink = ({ handleOnClick, title, to, icon }: SidebarLinkProps) => {
+  return (
+    <Link
+      to={to}
+      key={title}
+      className="flex gap-2 hover:underline items-center justify-start"
+      onClick={handleOnClick}
+    >
+      {icon}
+      <span className="text-2xl tracking-wide font-semibold">{title}</span>
+    </Link>
+  );
+};

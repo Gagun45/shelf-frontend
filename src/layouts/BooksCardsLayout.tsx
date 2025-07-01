@@ -6,11 +6,13 @@ import type { BooksResponse } from "@/types/types";
 type Props = {
   booksResponse: BooksResponse;
   editButton?: boolean;
+  deleteButton?: boolean;
 };
 
 const BooksCardsLayout = ({
   booksResponse: { books, totalBooks },
   editButton = false,
+  deleteButton = false,
 }: Props) => {
   const limit = useSearchStore((state) => state.limit);
   const title = useSearchStore((state) => state.title);
@@ -26,7 +28,12 @@ const BooksCardsLayout = ({
         </div>
 
         {books?.map((book) => (
-          <BookCard key={book.bookPid} book={book} editButton={editButton} />
+          <BookCard
+            key={book.bookPid}
+            book={book}
+            editButton={editButton}
+            deleteButton={deleteButton}
+          />
         ))}
       </div>
       <Pagination totalPages={totalPages} />

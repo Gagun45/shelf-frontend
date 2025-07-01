@@ -1,25 +1,29 @@
-import { useMyOrders } from "@/api/orders";
+import { useAllOrders } from "@/api/orders";
 import Loading from "@/components/Loading";
 import OrderComponent from "@/components/OrderComponent";
 import { Accordion } from "@/components/ui/accordion";
 
-const MyOrdersPage = () => {
-  const { orders, isLoading } = useMyOrders();
+const AllOrdersPage = () => {
+  const { orders, isLoading } = useAllOrders();
 
   if (isLoading) return <Loading />;
 
   if (!orders || orders?.length === 0)
-    return <div className="title">You have no orders yet!</div>;
+    return <div className="title">No orders yet!</div>;
 
   return (
     <div className="space-y-4">
-      <div className="title">My Orders: {orders.length}</div>
+      <div className="title">All Orders: {orders.length}</div>
       <Accordion type="single" collapsible className="flex flex-col gap-4">
         {orders?.map((order) => (
-          <OrderComponent key={order.orderPid} order={order} />
+          <OrderComponent
+            key={order.orderPid}
+            superadmin={true}
+            order={order}
+          />
         ))}
       </Accordion>
     </div>
   );
 };
-export default MyOrdersPage;
+export default AllOrdersPage;

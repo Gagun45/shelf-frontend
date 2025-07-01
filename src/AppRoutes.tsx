@@ -3,22 +3,30 @@ import MainLayout from "./layouts/MainLayout";
 import Homepage from "./pages/Homepage";
 import AddBook from "./pages/AddBook";
 import BookPage from "./pages/BookPage";
-import ProtectedRoute from "./auth/ProtectedRoute";
 import EditPage from "./pages/EditPage";
 import CartPage from "./pages/CartPage";
 import MyBooksPage from "./pages/MyBooksPage";
 import MyOrdersPage from "./pages/MyOrdersPage";
 import TestPage from "./pages/TestPage";
+import AdminOnlyRoute from "./auth/AdminOnlyRoute";
+import LoggedOnlyRoute from "./auth/LoggedOnlyRoute";
+import SuperAdminOnlyRoute from "./auth/SuperAdminOnlyRoute";
+import AllOrdersPage from "./pages/AllOrdersPage";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<MainLayout />}>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/add-book" element={<AddBook />} />
-          <Route path="/my-books" element={<MyBooksPage />} />
+        <Route element={<LoggedOnlyRoute />}>
           <Route path="/my-orders" element={<MyOrdersPage />} />
+        </Route>
+        <Route element={<AdminOnlyRoute />}>
+          <Route path="/add-book" element={<AddBook />} />
           <Route path="/book/edit/:id" element={<EditPage />} />
+          <Route path="/my-books" element={<MyBooksPage />} />
+        </Route>
+        <Route element={<SuperAdminOnlyRoute />}>
+          <Route path="/all-orders" element={<AllOrdersPage />} />
         </Route>
         <Route path="/cart" element={<CartPage />} />
         <Route path="/" element={<Homepage />} />

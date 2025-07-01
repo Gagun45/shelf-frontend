@@ -140,3 +140,43 @@ export const useMyBooks = () => {
 
   return { booksResponse, isLoading };
 };
+
+export const useDeleteBook = () => {
+  const { getAccessTokenSilently } = useAuth0();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const deleteBookRequest = async (bookPid: string) => {
+    const token = await getAccessTokenSilently();
+    const res = await fetch(`${API_BASE_URL}/books/book/delete/${bookPid}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookPid }),
+    });
+    if (!res.ok) throw new Error("Failed to delete books");
+  };
+
+  const {
+    mutateAsync: deleteBook,
+    isPending,
+    isSuccess,
+    isError,
+  } = useMutation({
+    mutationKey: ["addBook"],
+    mutationFn: deleteBookRequest,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Book deleted!");
+      queryClient.invalidateQueries({ queryKey: ["myBooks"] });
+    }
+  }, [isSuccess, navigate, queryClient]);
+  useEffect(() => {
+    if (isError) toast.error("Something went wrong");
+  }, [isError]);
+
+  return { deleteBook, isPending };
+};

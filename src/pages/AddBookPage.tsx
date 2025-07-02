@@ -6,7 +6,7 @@ const AddBookPage = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h3 className="title">AddBookPage</h3>
+      <h3 className="title">Add a Book</h3>
       <BookForm onSave={addBook} isPending={isPending} />
     </div>
   );

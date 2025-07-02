@@ -6,22 +6,16 @@ import AppSidebarHeader from "./AppSidebarHeader";
 
 import type { RoleType } from "@/types/types";
 import AppSidebarContent from "./AppSidebarContent";
-import { memo, useCallback } from "react";
 
 export const ICON_SIZE = "size-7";
 
 const AppSidebar = ({ role }: { role?: RoleType }) => {
-  console.log("sidebar");
-  const { isMobile, setOpenMobile } = useSidebar();
-  const handleOnClick = useCallback(() => {
-    if (isMobile) setOpenMobile(false);
-  }, []);
-
+  const { setOpenMobile } = useSidebar();
   return (
     <Sidebar>
       <AppSidebarHeader />
       <Separator />
-      <AppSidebarContent role={role} handleOnClick={handleOnClick} />
+      <AppSidebarContent role={role} handleOnClick={setOpenMobile} />
       <SidebarFooter className="bg-main h-24 justify-end">
         <Auth />
       </SidebarFooter>
@@ -29,4 +23,4 @@ const AppSidebar = ({ role }: { role?: RoleType }) => {
   );
 };
 
-export default memo(AppSidebar);
+export default AppSidebar;

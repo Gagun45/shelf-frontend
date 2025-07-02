@@ -7,7 +7,7 @@ const AppSidebarUserLinks = ({
   handleOnClick,
   role,
 }: {
-  handleOnClick: () => void;
+  handleOnClick: (open:boolean) => void;
   role?: RoleType;
 }) => {
   const USER_LINKS: LinkInt[] = [

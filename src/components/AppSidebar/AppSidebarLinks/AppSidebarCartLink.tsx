@@ -6,7 +6,7 @@ import AppSidebarLinksLayout from "./AppSidebarLinksLayout";
 const AppSidebarCartLink = ({
   handleOnClick,
 }: {
-  handleOnClick: () => void;
+  handleOnClick: (open:boolean) => void;
 }) => {
   const PUBLIC_LINKS: LinkInt[] = [
     {

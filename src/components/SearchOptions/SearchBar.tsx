@@ -1,8 +1,8 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { XCircle } from "lucide-react";
 import { useSearchStore } from "@/stores/useSearchStore";
 
-const SearchBar = memo(() => {
+const SearchBar = () => {
   const title = useSearchStore((state) => state.title);
   const setTitle = useSearchStore((state) => state.setTitle);
   const [localTitle, setLocalTitle] = useState(title);
@@ -34,5 +34,5 @@ const SearchBar = memo(() => {
       </button>
     </div>
   );
-});
+};
 export default SearchBar;

@@ -7,7 +7,7 @@ const AppSidebarLinksLayout = ({
   handleOnClick,
 }: {
   links: LinkInt[];
-  handleOnClick: () => void;
+  handleOnClick: (open: boolean) => void;
 }) => {
   return (
     <SidebarGroup className="gap-6">
@@ -17,7 +17,7 @@ const AppSidebarLinksLayout = ({
           to={to}
           icon={icon}
           title={title}
-          handleOnClick={handleOnClick}
+          handleOnClick={() => handleOnClick(false)}
         />
       ))}
     </SidebarGroup>

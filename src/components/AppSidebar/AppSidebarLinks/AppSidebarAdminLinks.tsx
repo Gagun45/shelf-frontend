@@ -7,7 +7,7 @@ const AppSidebarAdminLinks = ({
   handleOnClick,
   role,
 }: {
-  handleOnClick: () => void;
+  handleOnClick: (open:boolean) => void;
   role?: RoleType;
 }) => {
   const ADMIN_LINKS: LinkInt[] = [

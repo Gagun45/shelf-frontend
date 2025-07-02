@@ -5,7 +5,7 @@ import AppSidebarLinksLayout from "./AppSidebarLinksLayout";
 const AppSidebarPublicLinks = ({
   handleOnClick,
 }: {
-  handleOnClick: () => void;
+  handleOnClick: (open:boolean) => void;
 }) => {
   const PUBLIC_LINKS: LinkInt[] = [
     { icon: <BookA className={ICON_SIZE} />, title: "All Books", to: "/" },

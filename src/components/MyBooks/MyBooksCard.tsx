@@ -23,7 +23,7 @@ const MyBooksCard = ({ book }: { book: BookType }) => {
       />
       <BookCardCartSection book={book} />
       <MyBooksEditButton bookPid={book.bookPid} />
-      <MyBooksDeleteButton />
+      <MyBooksDeleteButton bookPid={book.bookPid} />
     </BookCardLayout>
   );
 };

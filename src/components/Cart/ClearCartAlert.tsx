@@ -8,11 +8,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
-import { Button } from "./ui/button";
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 
 const ClearCartAlert = () => {
-  const { clearCart } = useCartStore();
+  const clearCart = useCartStore((state) => state.clearCart);
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

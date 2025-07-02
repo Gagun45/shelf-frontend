@@ -30,9 +30,21 @@ const AllOrderCardChangeStatus = ({
           <SelectValue placeholder={localStatus} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="pending">Pending</SelectItem>
-          <SelectItem value="cancelled">Cancelled</SelectItem>
-          <SelectItem value="success">Success</SelectItem>
+          <SelectItem
+            value="pending"
+            className="bg-yellow-400 focus:bg-yellow-400"
+          >
+            Pending
+          </SelectItem>
+          <SelectItem value="cancelled" className="bg-red-400 focus:bg-red-400">
+            Cancelled
+          </SelectItem>
+          <SelectItem
+            value="success"
+            className="bg-green-400 focus:bg-green-400"
+          >
+            Success
+          </SelectItem>
         </SelectContent>
       </Select>
       <div className="flex items-center gap-2">

@@ -1,18 +1,24 @@
 import { useCartStore } from "@/stores/useCartStore";
 import { useNavigate } from "react-router-dom";
-import type { OrderItemInterface, OrderType, StatusType } from "@/types/types";
+import type {
+  OrderItemInterface,
+  OrdersResponse,
+  StatusType,
+} from "@/types/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { useOrderQuery } from "@/hooks/useOrderQuery";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useMyOrders = () => {
   const { getAccessTokenSilently } = useAuth0();
-  const fetchMyOrders = async (): Promise<OrderType[]> => {
+  const orderQuery = useOrderQuery();
+  const fetchMyOrders = async (): Promise<OrdersResponse> => {
     const token = await getAccessTokenSilently();
-    const res = await fetch(`${API_BASE_URL}/orders/my-orders`, {
+    const res = await fetch(`${API_BASE_URL}/orders/my-orders?${orderQuery}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -21,12 +27,12 @@ export const useMyOrders = () => {
     return res.json();
   };
 
-  const { data: orders, isLoading } = useQuery({
-    queryKey: ["myOrders"],
+  const { data: ordersResponse, isLoading } = useQuery({
+    queryKey: ["myOrders", orderQuery],
     queryFn: fetchMyOrders,
   });
 
-  return { orders, isLoading };
+  return { ordersResponse, isLoading };
 };
 
 export const useCreateOrder = () => {
@@ -67,9 +73,11 @@ export const useCreateOrder = () => {
 
 export const useAllOrders = () => {
   const { getAccessTokenSilently } = useAuth0();
-  const fetchAllOrders = async (): Promise<OrderType[]> => {
+  const orderQuery = useOrderQuery();
+
+  const fetchAllOrders = async (): Promise<OrdersResponse> => {
     const token = await getAccessTokenSilently();
-    const res = await fetch(`${API_BASE_URL}/orders/all-orders`, {
+    const res = await fetch(`${API_BASE_URL}/orders/all-orders?${orderQuery}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -78,12 +86,12 @@ export const useAllOrders = () => {
     return res.json();
   };
 
-  const { data: orders, isLoading } = useQuery({
-    queryKey: ["allOrders"],
+  const { data: ordersResponse, isLoading } = useQuery({
+    queryKey: ["allOrders", orderQuery],
     queryFn: fetchAllOrders,
   });
 
-  return { orders, isLoading };
+  return { ordersResponse, isLoading };
 };
 
 export const useEditOrder = () => {

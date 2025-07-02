@@ -17,6 +17,11 @@ export type BooksResponse = {
   totalBooks: number;
 };
 
+export type OrdersResponse = {
+  orders: OrderType[];
+  totalOrders: number;
+};
+
 export type NewBookType = {
   title: string;
   author: string;

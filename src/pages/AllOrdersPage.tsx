@@ -1,11 +1,11 @@
 import AllOrders from "@/components/AllOrders/AllOrders";
+import OrderPagesLayout from "@/layouts/OrderPagesLayout";
 
 const AllOrdersPage = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="title">All Orders</h2>
+    <OrderPagesLayout heading="All Orders">
       <AllOrders />
-    </div>
+    </OrderPagesLayout>
   );
 };
 export default AllOrdersPage;

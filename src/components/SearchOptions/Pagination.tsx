@@ -1,12 +1,16 @@
 import { Button } from "../ui/button";
 import { useEffect } from "react";
-import { useSearchStore } from "@/stores/useSearchStore";
 
 type Props = {
-  totalPages: number;
+  totalItems: number;
+  limit: number;
+  page: number;
+  setPage: (page: number) => void;
 };
 
-const Pagination = ({ totalPages }: Props) => {
+const Pagination = ({ totalItems, limit, page, setPage }: Props) => {
+  const totalPages = Math.max(Math.ceil(totalItems / limit), 1);
+
   const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
   const returnJsx = (res: (string | number)[]) => {
     const newResult = res.map((item, index) =>
@@ -41,15 +45,13 @@ const Pagination = ({ totalPages }: Props) => {
     }
     return returnJsx(result);
   };
-   const page = useSearchStore((s) => s.page);
-   const setPage = useSearchStore((s) => s.setPage);
   useEffect(() => {
     if (page > totalPages) {
       setPage(1);
     }
   }, [totalPages, page, setPage]);
 
-  const pagination = createPagination()
+  const pagination = createPagination();
 
   return (
     <div className="flex items-center justify-between gap-4">

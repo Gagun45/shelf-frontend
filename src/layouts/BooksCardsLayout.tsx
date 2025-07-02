@@ -9,9 +9,10 @@ const BooksCardsLayout = ({
   children: ReactNode;
   totalBooks: number;
 }) => {
-  const limit = useSearchStore((state) => state.limit);
   const title = useSearchStore((state) => state.title);
-  const totalPages = Math.max(Math.ceil(totalBooks / limit), 1);
+  const limit = useSearchStore((state) => state.limit);
+  const page = useSearchStore((state) => state.page);
+  const setPage = useSearchStore((state) => state.setPage);
 
   return (
     <div className="flex flex-col gap-4">
@@ -24,7 +25,12 @@ const BooksCardsLayout = ({
 
         {children}
       </div>
-      <Pagination totalPages={totalPages} />
+      <Pagination
+        totalItems={totalBooks}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 };

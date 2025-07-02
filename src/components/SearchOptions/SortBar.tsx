@@ -6,16 +6,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import BooksOnPage from "./BooksOnPage";
 import { useSearchStore } from "@/stores/useSearchStore";
+import ItemsOnPage from "./ItemsOnPage";
 
 const SortBar = () => {
+  const limit = useSearchStore((state) => state.limit);
+  const setLimit = useSearchStore((state) => state.setLimit);
+
   const sortOption = useSearchStore((state) => state.sortOption);
   const setSortOption = useSearchStore((state) => state.setSortOption);
 
   return (
     <div className="flex items-center gap-1">
-      <BooksOnPage />
+      <ItemsOnPage value={limit} onChange={setLimit}/>
       <Select onValueChange={(val) => setSortOption(val)}>
         <SelectTrigger className="w-fit">
           <SelectValue

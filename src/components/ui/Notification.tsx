@@ -2,6 +2,7 @@ import { useUserStore } from "@/stores/useUserStore";
 import { BellRingIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { toast } from "sonner";
 const SOCKET_URL = import.meta.env.VITE_SOCKET_BASE_URL;
 const socket = io(SOCKET_URL);
 
@@ -17,6 +18,7 @@ const Notification = () => {
   useEffect(() => {
     socket.on("private_message", (data) => {
       setNots((prev) => [...prev, data.message]);
+      toast.message('Order status update')
     });
     socket.on("receive_message", (data) => {
       console.log("DATA ", data);

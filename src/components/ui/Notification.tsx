@@ -2,7 +2,7 @@ import { useUserStore } from "@/stores/useUserStore";
 import { BellRingIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-const SOCKET_URL = import.meta.env.VITE_AUTH0_REDIRECT_URI
+const SOCKET_URL = import.meta.env.VITE_SOCKET_BASE_URL;
 const socket = io(SOCKET_URL);
 
 const Notification = () => {
@@ -10,7 +10,7 @@ const Notification = () => {
   const [nots, setNots] = useState<string[]>([]);
   useEffect(() => {
     if (userData) {
-      console.log('registering???')
+      console.log("registering???");
       socket.emit("register", userData?.userPid);
     }
   }, [userData]);
@@ -18,8 +18,12 @@ const Notification = () => {
     socket.on("private_message", (data) => {
       setNots((prev) => [...prev, data.message]);
     });
+    socket.on("receive_message", (data) => {
+      console.log("DATA ", data);
+    });
     return () => {
       socket.off("private_message");
+      socket.off('receive_message')
     };
   }, []);
   useEffect(() => {

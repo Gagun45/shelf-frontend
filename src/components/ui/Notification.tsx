@@ -10,6 +10,7 @@ const Notification = () => {
   const [nots, setNots] = useState<string[]>([]);
   useEffect(() => {
     if (userData) {
+      console.log('registering???')
       socket.emit("register", userData?.userPid);
     }
   }, [userData]);

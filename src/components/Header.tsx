@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import CartIcon from "./CartIcon";
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
-import Notification from "./ui/Notification";
+import Notification from "./Notification";
 
 const Header = () => {
   const { isMobile } = useSidebar();
@@ -11,7 +11,7 @@ const Header = () => {
         Shelf
       </Link>
       <div className="flex items-center gap-8">
-        <Notification />
+        <Notification/>
         <CartIcon className="hidden xs:flex" />
         {isMobile && <SidebarTrigger />}
       </div>

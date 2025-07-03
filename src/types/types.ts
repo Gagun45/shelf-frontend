@@ -12,6 +12,12 @@ export type BookType = {
   price: number;
 };
 
+export interface NotificationInterface {
+  notificationPid: string;
+  message: string;
+  status: "notRead" | "read";
+}
+
 export type BooksResponse = {
   books: BookType[];
   totalBooks: number;

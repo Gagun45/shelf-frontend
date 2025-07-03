@@ -6,7 +6,7 @@ import { useUserStore } from "@/stores/useUserStore";
 
 const Auth = ({ withText = true }: { withText?: boolean }) => {
   const { logout } = useAuth0();
-  const { userData, clearUserData } = useUserStore();
+  const { userData } = useUserStore();
 
   const returnTo = import.meta.env.VITE_AUTH0_REDIRECT_URI;
 
@@ -15,8 +15,7 @@ const Auth = ({ withText = true }: { withText?: boolean }) => {
       {userData ? (
         <Button
           className="bg-destructive hover:bg-destructive"
-          onClick={() => {
-            clearUserData();
+          onClick={async () => {
             logout({ logoutParams: { returnTo } });
           }}
         >

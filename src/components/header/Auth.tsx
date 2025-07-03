@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogOutIcon } from "lucide-react";
-import LoginPopUp from "../LoginPopUp";
+import LoginPopUp from "../AuthButton";
 import { useUserStore } from "@/stores/useUserStore";
 
 const Auth = ({ withText = true }: { withText?: boolean }) => {
@@ -16,7 +16,7 @@ const Auth = ({ withText = true }: { withText?: boolean }) => {
         <Button
           className="bg-destructive hover:bg-destructive"
           onClick={async () => {
-            logout({ logoutParams: { returnTo } });
+            await logout({ logoutParams: { returnTo } });
           }}
         >
           <LogOutIcon />

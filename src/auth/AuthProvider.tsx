@@ -6,6 +6,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
   const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
   const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI;
+  console.log("auth provider");
 
   if (!domain || !clientId || !audience || !redirectUri) {
     throw new Error("Initial auth error");
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         redirect_uri: redirectUri,
         audience,
       }}
+      cacheLocation="localstorage"
     >
       {children}
     </Auth0Provider>

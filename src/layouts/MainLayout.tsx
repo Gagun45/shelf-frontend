@@ -9,12 +9,10 @@ import { Outlet } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const MainLayout = () => {
-  const { isAuthenticated, isLoading, getAccessTokenSilently, logout } =
-    useAuth0();
+  const { isAuthenticated, getAccessTokenSilently, logout } = useAuth0();
   const { clearUserData, userData, setUserData } = useUserStore();
 
   useEffect(() => {
-    if (isLoading) return;
     if (!isAuthenticated && userData) {
       clearUserData();
       return;
@@ -37,7 +35,6 @@ const MainLayout = () => {
   }, [
     isAuthenticated,
     clearUserData,
-    isLoading,
     userData,
     logout,
     getAccessTokenSilently,

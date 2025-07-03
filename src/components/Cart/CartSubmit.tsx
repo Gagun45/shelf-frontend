@@ -3,11 +3,12 @@ import { Button } from "../ui/button";
 import { useUserStore } from "@/stores/useUserStore";
 import type { CartItemInterface } from "@/stores/useCartStore";
 import type { OrderItemInterface } from "@/types/types";
-import LoginPopUp from "../LoginPopUp";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const CartSubmit = ({ cart }: { cart: CartItemInterface[] }) => {
   const { createOrder } = useCreateOrder();
   const { userData } = useUserStore();
+  const { loginWithRedirect } = useAuth0();
 
   const isEnabled = cart.some((item) => item.quantity > 0);
 
@@ -27,7 +28,7 @@ const CartSubmit = ({ cart }: { cart: CartItemInterface[] }) => {
           Order
         </Button>
       ) : (
-        <LoginPopUp />
+        <Button onClick={() => loginWithRedirect()}>Login</Button>
       )}
     </div>
   );

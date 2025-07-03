@@ -12,10 +12,12 @@ import SuperAdminOnlyRoute from "./auth/SuperAdminOnlyRoute";
 import AllOrdersPage from "./pages/AllOrdersPage";
 import AllBooksPage from "./pages/AllBooksPage";
 import AddBookPage from "./pages/AddBookPage";
+import AuthCallback from "./pages/AuthCallback";
 
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route path="/auth-callback" element={<AuthCallback />} />
       <Route element={<MainLayout />}>
         <Route element={<LoggedOnlyRoute />}>
           <Route path="/my-orders" element={<MyOrdersPage />} />

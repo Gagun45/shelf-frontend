@@ -43,6 +43,7 @@ const ImageFile = ({
               <Input
                 ref={fileInputRef}
                 type="file"
+                accept=".png, .jpg, .jpeg"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {

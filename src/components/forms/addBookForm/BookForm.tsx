@@ -18,19 +18,19 @@ import Price from "./Price";
 const formSchema = z
   .object({
     title: z.string().min(1, {
-      message: "Title must be at least 2 characters long",
+      message: "Title must be at least 1 characters long",
     }),
     genres: z.array(z.string()).min(1, "Choose at least 1 genres"),
     author: z.string().min(1, {
-      message: "Author must be at least 2 characters long",
+      message: "Author must be at least 1 characters long",
     }),
     language: z.string().min(1, {
-      message: "Language must be at least 2 characters long",
+      message: "Language must be at least 1 characters long",
     }),
     publishYear: z.coerce
       .number({ message: "Enter a number" })
-      .min(1980)
-      .max(2025),
+      .min(1900)
+      .max(new Date().getFullYear()),
     price: z.coerce.number({ message: "Enter a number" }).min(1).max(20000),
     imageFile: z.instanceof(File).optional().nullable(),
     imageUrl: z.string().optional(),

@@ -87,12 +87,13 @@ const Notification = () => {
                   <div
                     className={`${
                       status === "notRead" && "bg-accent"
-                    } p-2 border-2 flex rounded-md`}
+                    } p-2 border-2 flex items-center rounded-md`}
                   >
                     <span>{message}</span>
                     {status === "notRead" && (
                       <Button
-                        className="ml-auto"
+                        className="ml-auto size-5 rounded-xs"
+                        size={'icon'}
                         onClick={() => handleMarkAsRead(notificationPid)}
                       >
                         <CheckIcon />

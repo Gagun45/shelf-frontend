@@ -70,7 +70,7 @@ const Notification = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className={"relative"}>
+        <div className={"relative cursor-pointer"}>
           <span className="absolute bg-amber-400 text-sm size-6 flex items-center justify-center rounded-full -top-1/3 -right-1/3">
             {newNots}
           </span>
